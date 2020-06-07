@@ -13,14 +13,14 @@
 
 
 <style lang="scss">
-$backgroundC: #222;
+$backgroundC: #333;
 $navBackground: #ccc;
 
 body {
   margin: 0;
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
