@@ -33,7 +33,7 @@ import Login from '@/components/Login.vue'
         data() {
             return {
                 api_key:'b0d730e2ac94cd220ea9e5f67fa131a4',
-                url_base: 'api.openweathermap.org/data/2.5/weather?q=',
+                url_base: 'https://api.openweathermap.org/data/2.5/',
                 query: '',
                 weather: {}
             }
@@ -41,7 +41,7 @@ import Login from '@/components/Login.vue'
         methods: {
             fetchWeather (e) {
                 if(e.key == "Enter") {
-                    fetch(`${this.url_base}${this.query}&units=metric&APPID=${this.api_key}`)
+                    fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`)
                     .then(response => {
                         return response.json();
                     }).then(this.setResults);
