@@ -10,15 +10,15 @@
                 v-on:keypress="fetchWeather"
             >
         </div>
-        <div class="weather-wrap">
+        <div class="weather-wrap" v-if="typeof weather.main != 'undefined'">
             <div class="location-box">
-                <div class="location">Hamburg, Ger</div>
-                <div class="date">Saturday 6 June 2020</div>
+                <div class="location">{{weather.name}}, {{weather.sys.country}}</div>
+                <div class="date">{{ getDate() }}</div>
             </div>
 
             <div class="weather-box">
-                <div class="temp">13°C</div>
-                <div class="weather">Sunny</div>
+                <div class="temp">{{ Math.round(weather.main.temp)}}°C</div>
+                <div class="weather">{{weather.weather[0].main}}</div>
             </div>
         </div>
         
@@ -52,6 +52,10 @@ import Login from '@/components/Login.vue'
             setResults (results) {
                 this.weather = results;
                 // console.log(this.weather);
+            },
+            getDate () {
+                var date = new Date;
+                return date.toDateString();
             }
         },
         components: {
