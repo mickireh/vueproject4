@@ -9,7 +9,7 @@
         </div>
 
         <div id="loginForm" class="hide">
-            <form action="">
+            <form>
                 <label for="loginEmail">Email</label>
                 <input id="loginEmail" type="email">
                 <label for="loginPassword">Password</label>
@@ -18,11 +18,11 @@
             </form>
         </div>
         <div id="signupForm" class="hide">
-            <form action="">
+            <form>
                 <label for="signupEmail">Email</label>
-                <input id="signupEmail" type="email">
+                <input id="signupEmail" type="email" v-model="signupEmail">
                 <label for="signupPassword">Password</label>
-                <input id="signupPassword" type="password">
+                <input id="signupPassword" type="password" v-model="signupPassword">
                 <button @click="signupbtn">Sign up</button>
             </form>
         </div>
@@ -31,9 +31,18 @@
 </template>
 
 <script>
-import $ from 'jquery'
-export default {
+import $ from 'jquery';
+import firebase from 'firebase';
+import 'firebase/auth';
 
+export default {
+    data() {
+        return {
+            error: '',
+            signupEmail: '',
+            signupPassword: '',
+        }
+    },
     methods: {
         showSignup: () => {
             var signupForm = $('#signupForm');
@@ -41,8 +50,21 @@ export default {
             var loginForm = $('#loginForm');
             loginForm.addClass('hide');
         },
-        signupbtn: (e) => {
-            e.preventDefault();
+        signupbtn: function() {
+            // e.preventDefault();
+            console.log(this);
+            console.log(this.signupEmail);
+            console.log(this.signupPassword);
+            // console.log(this);
+            firebase.auth().createUserWithEmailAndPassword(this.signupEmail, this.signupPassword)
+            .then(function(user) {
+                console.log(user);
+                console.log(firebase.auth().currentUser);
+            },
+            function(err) {
+                console.log(err.message);
+            }
+            );
         },
         showLogin: () => {
             var loginForm = document.getElementById('loginForm');
@@ -54,7 +76,8 @@ export default {
             e.preventDefault();
         },
         logout: () => {
-
+            firebase.auth().signOut();
+            console.log(firebase.auth().currentUser);
         }
     }
 }
