@@ -6,8 +6,8 @@
                 <li v-on:click="showSignup">Signup</li>
                 <li v-on:click="logout">Logout</li>
             </ul>
-            
-        </div>  
+        </div>
+
         <div id="loginForm" class="hide">
             <form action="">
                 <label for="loginEmail">Email</label>
@@ -23,28 +23,32 @@
                 <input id="signupEmail" type="email">
                 <label for="signupPassword">Password</label>
                 <input id="signupPassword" type="password">
-                <button @click="signupbtn">Login</button>
+                <button @click="signupbtn">Sign up</button>
             </form>
         </div>
+       
     </div>
 </template>
 
 <script>
+import $ from 'jquery'
 export default {
+
     methods: {
         showSignup: () => {
-            var signupForm = document.getElementById('signupForm');
-            signupForm.classList.toggle('hide');
-            var loginForm = document.getElementById('loginForm');
-            loginForm.classList.toggle('hide');
+            var signupForm = $('#signupForm');
+            signupForm.toggleClass('hide');
+            var loginForm = $('#loginForm');
+            loginForm.addClass('hide');
         },
         signupbtn: (e) => {
             e.preventDefault();
         },
         showLogin: () => {
-            // console.log(this);
             var loginForm = document.getElementById('loginForm');
             loginForm.classList.toggle('hide');
+            var signupForm = $('#signupForm');
+            signupForm.addClass('hide');
         },
         loginbtn: function(e) {
             e.preventDefault();
@@ -70,24 +74,77 @@ export default {
         display: flex;
     }
     li {
-        margin-right:10px;
+        margin-right:14px;
     }
-}
 
-#loginForm, #signupForm {
+
+}
+.Form-position {
+    position: relative;
+    width:100%;
+}
+#loginForm {
     position:absolute;
-    top:130px;
+    top:131px;
     right:40px;
     background-color: rgba($color: #222, $alpha: .5);
     border-radius: 5px;
     padding:5px;
 
     input, label {
+        font-family: 'Montserrat', sans-serif;
+        color: #444;
         display:block;
         margin-top:10px;
+        margin-left: auto;
+        margin-right: auto;
     }
     input {
         padding:8px;
+    }
+    button {
+        font-family: 'Montserrat', sans-serif;
+        background-color: slategray;
+        color: #000;
+        border-radius: 4px;
+        width:91px;
+        height:40px;
+        margin-top: 10px;
+    }
+}
+#signupForm {
+    position: absolute;
+    width:300px;
+    top: 131px;
+
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+
+    background-color: rgba($color: #222, $alpha: .5);
+    border-radius: 5px;
+    padding:5px;
+
+    input, label {
+        font-family: 'Montserrat', sans-serif;
+        color: #444;
+        display: block;
+        margin-top:20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    input {
+        padding: 8px;
+    }
+    button {
+        font-family: 'Montserrat', sans-serif;
+        background-color: slategray;
+        color: #000;
+        border-radius: 4px;
+        width:91px;
+        height:40px;
+        margin-top: 10px;
     }
 }
 .hide {
