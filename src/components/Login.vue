@@ -11,9 +11,9 @@
         <div id="loginForm" class="hide">
             <form>
                 <label for="loginEmail">Email</label>
-                <input id="loginEmail" type="email">
+                <input id="loginEmail" type="email" v-model="loginEmail">
                 <label for="loginPassword">Password</label>
-                <input id="loginPassword" type="password">
+                <input id="loginPassword" type="password" v-model="loginPassword">
                 <button @click="loginbtn">Login</button>
             </form>
         </div>
@@ -41,6 +41,8 @@ export default {
             error: '',
             signupEmail: '',
             signupPassword: '',
+            loginEmail: '',
+            loginPassword: ''
         }
     },
     methods: {
@@ -60,6 +62,9 @@ export default {
             .then(function(user) {
                 console.log(user);
                 console.log(firebase.auth().currentUser);
+
+                var signupForm = $('#signupForm');
+                signupForm.addClass('hide');
             },
             function(err) {
                 console.log(err.message);
@@ -72,12 +77,27 @@ export default {
             var signupForm = $('#signupForm');
             signupForm.addClass('hide');
         },
-        loginbtn: function(e) {
-            e.preventDefault();
+        loginbtn: function() {
+            // e.preventDefault();
+            firebase.auth().signInWithEmailAndPassword(this.loginEmail, this.loginPassword)
+            .then(function(user) {
+                console.log(user);
+                var loginForm = $('#loginForm');
+                loginForm.addClass('hide');
+            },
+            function(err) {
+                console.log(err.message);
+            });
         },
         logout: () => {
-            firebase.auth().signOut();
-            console.log(firebase.auth().currentUser);
+            firebase.auth().signOut()
+            .then(function() {
+                console.log(firebase.auth().currentUser);
+            },
+            function(err) {
+                console.log(err.message);
+            });
+            
         }
     }
 }
