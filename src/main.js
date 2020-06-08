@@ -19,8 +19,17 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+let app;
 
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
+// firebase.auth before creating app to have user before; refreshing page issues when logged in
+firebase.auth().onAuthStateChanged(() => {
+  if (!app) {
+    app = new Vue({
+      router,
+      render: h => h(App)
+    }).$mount('#app')
+  }
+});
+
+
+

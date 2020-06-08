@@ -2,9 +2,11 @@
     <div>
         <div class="UserLogging">
             <ul>
-                <li v-on:click="showLogin">Login</li>
-                <li v-on:click="showSignup">Signup</li>
-                <li v-on:click="logout">Logout</li>
+                <li class="UserEmail" v-if="loggedIn == true">{{ this.user }}</li>
+                <li v-on:click="logout" v-if="loggedIn == true">Logout</li>
+                <li v-on:click="showLogin" v-if="loggedIn == false">Login</li>
+                <li v-on:click="showSignup" v-if="loggedIn == false">Signup</li>
+                
             </ul>
         </div>
 
@@ -36,13 +38,26 @@ import firebase from 'firebase';
 import 'firebase/auth';
 
 export default {
+    created() {
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.loggedIn = true;
+                this.user = firebase.auth().currentUser.email;
+                // console.log(firebase.auth().currentUser.email);
+            } else {
+                this.loggedIn = false;
+            }
+        })
+    },
     data() {
         return {
             error: '',
             signupEmail: '',
             signupPassword: '',
             loginEmail: '',
-            loginPassword: ''
+            loginPassword: '',
+            loggedIn: false,
+            user: ''
         }
     },
     methods: {
@@ -53,15 +68,15 @@ export default {
             loginForm.addClass('hide');
         },
         signupbtn: function() {
-            // e.preventDefault();
-            console.log(this);
-            console.log(this.signupEmail);
-            console.log(this.signupPassword);
-            // console.log(this);
+            // cuz of scoping vm(view-model to this)
+            // var vm = this;
             firebase.auth().createUserWithEmailAndPassword(this.signupEmail, this.signupPassword)
+            // no arrow functions here
             .then(function(user) {
                 console.log(user);
                 console.log(firebase.auth().currentUser);
+
+                // vm.loggedIn = true;
 
                 var signupForm = $('#signupForm');
                 signupForm.addClass('hide');
@@ -78,10 +93,13 @@ export default {
             signupForm.addClass('hide');
         },
         loginbtn: function() {
-            // e.preventDefault();
+
+            // var vm = this;
             firebase.auth().signInWithEmailAndPassword(this.loginEmail, this.loginPassword)
-            .then(function(user) {
-                console.log(user);
+            .then(function() {
+                // console.log(user);
+                // console.log(firebase.auth().currentUser);
+                // vm.loggedIn = true;
                 var loginForm = $('#loginForm');
                 loginForm.addClass('hide');
             },
@@ -89,10 +107,12 @@ export default {
                 console.log(err.message);
             });
         },
-        logout: () => {
+        logout: function() {
+            // var vm = this;
             firebase.auth().signOut()
             .then(function() {
-                console.log(firebase.auth().currentUser);
+                // console.log(firebase.auth().currentUser);
+                // vm.loggedIn = false;
             },
             function(err) {
                 console.log(err.message);
@@ -110,7 +130,7 @@ export default {
     right: 40px;
 
     font-weight: bold;
-    cursor: pointer;
+    
 
     ul {
         list-style: none;
@@ -118,6 +138,10 @@ export default {
     }
     li {
         margin-right:14px;
+        cursor: pointer;
+    }
+    .UserEmail {
+        color:rgb(8, 97, 30);
     }
 
 
