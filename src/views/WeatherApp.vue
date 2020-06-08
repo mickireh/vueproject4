@@ -1,27 +1,28 @@
 <template>
-    <div class="weatherApp">
+    <div >
         <Login />
-        <div class="search-box">
-            <input
-                type="text"
-                class="weather_search"
-                placeholder="Enter City..."
-                v-model="query"
-                v-on:keypress="fetchWeather"
-            >
-        </div>
-        <div class="weather-wrap" v-if="typeof weather.main != 'undefined'">
-            <div class="location-box">
-                <div class="location">{{weather.name}}, {{weather.sys.country}}</div>
-                <div class="date">{{ getDate() }}</div>
+        <div class="weatherApp">
+            <div class="search-box">
+                <input
+                    type="text"
+                    class="weather_search"
+                    placeholder="Enter City..."
+                    v-model="query"
+                    v-on:keypress="fetchWeather"
+                >
             </div>
+            <div class="weather-wrap" v-if="typeof weather.main != 'undefined'">
+                <div class="location-box">
+                    <div class="location">{{weather.name}}, {{weather.sys.country}}</div>
+                    <div class="date">{{ getDate() }}</div>
+                </div>
 
-            <div class="weather-box">
-                <div class="temp">{{ Math.round(weather.main.temp)}}°C</div>
-                <div class="weather">{{weather.weather[0].main}}</div>
+                <div class="weather-box">
+                    <div class="temp">{{ Math.round(weather.main.temp)}}°C</div>
+                    <div class="weather">{{weather.weather[0].main}}</div>
+                </div>
             </div>
         </div>
-        
     </div>
 </template>
 

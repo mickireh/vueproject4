@@ -1,7 +1,11 @@
 <template>
     <div>
-        <div class="login">
-            <span v-on:click="showLogin">Login</span>
+        <div class="UserLogging">
+            <ul>
+                <li v-on:click="showLogin">Login</li>
+                <li v-on:click="showSignup">Signup</li>
+            </ul>
+            
         </div>  
         <div id="loginForm" class="hide">
             <form action="">
@@ -9,6 +13,7 @@
                 <input id="loginEmail" type="email">
                 <label for="loginPassword">Password</label>
                 <input id="loginPassword" type="password">
+                <button @click="loginbtn">Login</button>
             </form>
         </div>
     </div>
@@ -21,21 +26,22 @@ export default {
             console.log(this);
             var loginForm = document.getElementById('loginForm');
             loginForm.classList.toggle('hide');
+        },
+        loginbtn: function(e) {
+            e.preventDefault();
         }
     }
 }
 </script>
 
 <style scoped lang="scss">
-.login {
+.UserLogging {
     position: absolute;
     top: 30px;
     right: 40px;
 
     font-weight: bold;
     cursor: pointer;
-
-
 }
 
 #loginForm {
