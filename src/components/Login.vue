@@ -6,7 +6,6 @@
                 <li v-on:click="logout" v-if="loggedIn == true">Logout</li>
                 <li v-on:click="showLogin" v-if="loggedIn == false">Login</li>
                 <li v-on:click="showSignup" v-if="loggedIn == false">Signup</li>
-                
             </ul>
         </div>
 
@@ -87,14 +86,15 @@ export default {
             );
         },
         showLogin: () => {
-            var loginForm = document.getElementById('loginForm');
-            loginForm.classList.toggle('hide');
+            var loginForm = $('#loginForm');
+            loginForm.toggleClass('hide');
+
             var signupForm = $('#signupForm');
             signupForm.addClass('hide');
         },
         loginbtn: function() {
 
-            // var vm = this;
+            var vm = this;
             firebase.auth().signInWithEmailAndPassword(this.loginEmail, this.loginPassword)
             .then(function() {
                 // console.log(user);
@@ -104,7 +104,12 @@ export default {
                 loginForm.addClass('hide');
             },
             function(err) {
+                if (vm.loginEmail === '') {
+                    err.message = 'empty';
+                    // console.log('err.message');
+                }
                 console.log(err.message);
+                // console.log(err);
             });
         },
         logout: function() {
@@ -128,6 +133,7 @@ export default {
     position: absolute;
     top: 30px;
     right: 40px;
+
 
     font-weight: bold;
     
@@ -158,6 +164,10 @@ export default {
     border-radius: 5px;
     padding:5px;
 
+    transition: opacity 1s ease;
+
+    animation: fadeIn .5s;
+
     input, label {
         font-family: 'Montserrat', sans-serif;
         color: #444;
@@ -179,6 +189,8 @@ export default {
         margin-top: 10px;
     }
 }
+
+
 #signupForm {
     position: absolute;
     width:300px;
@@ -192,6 +204,8 @@ export default {
     background-color: rgba($color: #222, $alpha: .5);
     border-radius: 5px;
     padding:5px;
+
+    animation: fadeIn .5s;
 
     input, label {
         font-family: 'Montserrat', sans-serif;
@@ -216,5 +230,13 @@ export default {
 }
 .hide {
     display: none;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 </style>
