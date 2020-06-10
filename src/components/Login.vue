@@ -160,7 +160,7 @@ export default {
     position:absolute;
     top:131px;
     right:40px;
-    background-color: rgba($color: #222, $alpha: .5);
+    background-color: rgba($color: #222, $alpha: .75);
     border-radius: 5px;
     padding:5px;
 
@@ -201,7 +201,7 @@ export default {
     left: 0;
     right: 0;
 
-    background-color: rgba($color: #222, $alpha: .5);
+    background-color: rgba($color: #222, $alpha: .75);
     border-radius: 5px;
     padding:5px;
 
