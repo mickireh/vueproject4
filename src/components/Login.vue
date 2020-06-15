@@ -2,10 +2,10 @@
     <div>
         <div class="UserLogging">
             <ul>
-                <li class="UserEmail" v-if="loggedIn == true">{{ this.user }}</li>
-                <li v-on:click="logout" v-if="loggedIn == true">Logout</li>
-                <li v-on:click="showLogin" v-if="loggedIn == false">Login</li>
-                <li v-on:click="showSignup" v-if="loggedIn == false">Signup</li>
+                <li class="UserEmail user-li-log" v-if="loggedIn == true">{{ this.user }}</li>
+                <li class="second-li-log" v-on:click="logout" v-if="loggedIn == true">Logout</li>
+                <li class="first-li-log" v-on:click="showLogin" v-if="loggedIn == false">Login</li>
+                <li class="second-li-log" v-on:click="showSignup" v-if="loggedIn == false">Signup</li>
             </ul>
         </div>
 
@@ -168,39 +168,90 @@ export default {
         display: flex;
     }
     li {
-        margin-right:34px;
+        margin-right:24px;
         cursor: pointer;
         width:120px;
         height:44px;
         line-height: 44px;
+        color:silver;
 
+        // animation: fadeIn .5s;
 
-        animation: fadeIn .5s;
-        
         z-index: 1;
         position: relative;
         overflow: hidden;
     }
 
-    li:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background: #000;
-    -webkit-transform-origin: 100% 0;
-    -ms-transform-origin: 100% 0;
-    transform-origin: 100% 0;
-    -webkit-transform: skew(-33deg);
-    -ms-transform: skew(-33deg);
-    transform: skew(-33deg);
-    z-index: -1;
+
+
+    .first-li-log:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: #222;
+        -webkit-transform-origin: 100% 0;
+        -ms-transform-origin: 100% 0;
+        transform-origin: 100% 0;
+        -webkit-transform: skew(-33deg);
+        -ms-transform: skew(-33deg);
+        transform: skew(-33deg);
+        z-index: -1;
     }
 
-    li:hover:after {
-        background:seagreen;
+    .user-li-log:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: #a1bccc;
+        -webkit-transform-origin: 100% 0;
+        -ms-transform-origin: 100% 0;
+        transform-origin: 100% 0;
+        -webkit-transform: skew(-33deg);
+        -ms-transform: skew(-33deg);
+        transform: skew(-33deg);
+        z-index: -1;
+    }
+
+    // .second-li-log {
+    //     background-color: #000;
+    // }
+    // .second-li-log:before {
+    //     content: '';
+    //     position: absolute;
+    //     top: 0;
+    //     left: 0;
+    //     width: 0;
+    //     height: 0;
+    //     border-style: solid;
+    //     border-width: 44px 44px 0 0;
+    //     border-color: #ccc transparent transparent transparent;
+    // }
+
+    .second-li-log:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #222;
+        -webkit-transform-origin: 0 100%;
+        -ms-transform-origin: 0 100%;
+        transform-origin: 0 100%;
+        -webkit-transform: skew(-33deg);
+        -ms-transform: skew(-33deg);
+        transform: skew(-33deg);
+        z-index: -1;
+    }
+
+    .first-li-log:hover:after, .second-li-log:hover:after {
+        background:#555;
     }
 
     .UserEmail {
