@@ -9,7 +9,7 @@
             </ul>
         </div>
 
-        <div id="loginForm" class="hide">
+        <div id="loginForm" v-if="showLoginSwitch == true">
             <form>
                 <label for="loginEmail">Email</label>
                 <input id="loginEmail" type="email" v-model="loginEmail">
@@ -18,7 +18,7 @@
                 <button @click="loginbtn">Login</button>
             </form>
         </div>
-        <div id="signupForm" class="hide">
+        <div id="signupForm" v-if="showSignupSwitch == true">
             <form>
                 <label for="signupEmail">Email</label>
                 <input id="signupEmail" type="email" v-model="signupEmail">
@@ -56,19 +56,31 @@ export default {
             loginEmail: '',
             loginPassword: '',
             loggedIn: false,
-            user: ''
+            user: '',
+            showLoginSwitch: false,
+            showSignupSwitch: false
         }
     },
     methods: {
-        showSignup: () => {
-            var signupForm = $('#signupForm');
-            signupForm.toggleClass('hide');
-            var loginForm = $('#loginForm');
-            loginForm.addClass('hide');
+        setError: function(err, formp, formbtn) {
+            // console.log(err, form);
+            $(formp).detach();
+            var error = $('<p/>').text(err.message);
+            error.css('color','red');
+            error.insertAfter(formbtn);
+        },
+        showSignup: function() {
+            // var signupForm = $('#signupForm');
+            // signupForm.toggleClass('hide');
+            // var loginForm = $('#loginForm');
+            // loginForm.addClass('hide');
+            this.showLoginSwitch = false;
+            // console.log(this.showLoginBool);
+            this.showSignupSwitch = !this.showSignupSwitch;
         },
         signupbtn: function() {
             // cuz of scoping vm(view-model to this)
-            // var vm = this;
+            var vm = this;
             firebase.auth().createUserWithEmailAndPassword(this.signupEmail, this.signupPassword)
             // no arrow functions here
             .then(function(user) {
@@ -81,16 +93,26 @@ export default {
                 signupForm.addClass('hide');
             },
             function(err) {
-                console.log(err.message);
+                var formp = $('#signupForm p');
+                var formbtn = $('#signupForm button')
+                vm.setError(err, formp, formbtn);
+                // console.log(err.message);
+                // $('#signupForm p').detach();
+                // var error = $('<p/>').text(err.message);
+                // error.css('color','red');
+                // error.insertAfter('#signupForm button');
             }
             );
         },
-        showLogin: () => {
-            var loginForm = $('#loginForm');
-            loginForm.toggleClass('hide');
+        showLogin: function() {
+            // var loginForm = $('#loginForm');
+            // loginForm.toggleClass('hide');
 
-            var signupForm = $('#signupForm');
-            signupForm.addClass('hide');
+            // var signupForm = $('#signupForm');
+            // signupForm.addClass('hide');
+            this.showLoginSwitch = !this.showLoginSwitch;
+            // console.log(this.showLoginBool);
+            this.showSignupSwitch = false;
         },
         loginbtn: function() {
 
@@ -104,12 +126,16 @@ export default {
                 loginForm.addClass('hide');
             },
             function(err) {
-                if (vm.loginEmail === '') {
+                if (vm.loginEmail.trim() === '') {
                     err.message = 'empty';
-                    // console.log('err.message');
                 }
-                console.log(err.message);
-                // console.log(err);
+                // $('#loginForm p').detach();
+                // var error = $('<p/>').text(err.message);
+                // error.css('color','red');
+                // error.insertAfter('#loginForm button');
+                var formp = $('#loginForm p');
+                var formbtn = $('#loginForm button')
+                vm.setError(err, formp, formbtn);
             });
         },
         logout: function() {
@@ -134,8 +160,7 @@ export default {
     top: 30px;
     right: 40px;
 
-
-    font-weight: bold;
+    font-weight: 300;
     
 
     ul {
@@ -143,14 +168,44 @@ export default {
         display: flex;
     }
     li {
-        margin-right:14px;
+        margin-right:34px;
         cursor: pointer;
+        width:120px;
+        height:44px;
+        line-height: 44px;
+
+
+        animation: fadeIn .5s;
+        
+        z-index: 1;
+        position: relative;
+        overflow: hidden;
     }
+
+    li:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    -webkit-transform-origin: 100% 0;
+    -ms-transform-origin: 100% 0;
+    transform-origin: 100% 0;
+    -webkit-transform: skew(-33deg);
+    -ms-transform: skew(-33deg);
+    transform: skew(-33deg);
+    z-index: -1;
+    }
+
+    li:hover:after {
+        background:seagreen;
+    }
+
     .UserEmail {
         color:rgb(8, 97, 30);
     }
-
-
 }
 .Form-position {
     position: relative;
@@ -160,24 +215,28 @@ export default {
     position:absolute;
     top:131px;
     right:40px;
-    background-color: rgba($color: #222, $alpha: .75);
+    width: 200px;
+    background-color: rgba($color: #222, $alpha: .9);
     border-radius: 5px;
     padding:5px;
+    z-index: 1;
 
-    transition: opacity 1s ease;
+    // transition: opacity 1s ease;
 
     animation: fadeIn .5s;
 
     input, label {
         font-family: 'Montserrat', sans-serif;
-        color: #444;
+        color: #999;
         display:block;
         margin-top:10px;
         margin-left: auto;
         margin-right: auto;
+        max-width:150px;
     }
     input {
         padding:8px;
+        color:#333;
     }
     button {
         font-family: 'Montserrat', sans-serif;
@@ -201,21 +260,23 @@ export default {
     left: 0;
     right: 0;
 
-    background-color: rgba($color: #222, $alpha: .75);
+    background-color: rgba($color: #222, $alpha: .9);
     border-radius: 5px;
     padding:5px;
+    z-index: 1;
 
     animation: fadeIn .5s;
 
     input, label {
         font-family: 'Montserrat', sans-serif;
-        color: #444;
+        color: #999;
         display: block;
         margin-top:20px;
         margin-left: auto;
         margin-right: auto;
     }
     input {
+        color:#333;
         padding: 8px;
     }
     button {
@@ -227,10 +288,18 @@ export default {
         height:40px;
         margin-top: 10px;
     }
+    .error {
+        color:red;
+    }
 }
 .hide {
     display: none;
 }
+
+.error {
+    color:red;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
