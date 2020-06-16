@@ -170,7 +170,7 @@ export default {
     li {
         margin-right:24px;
         cursor: pointer;
-        width:120px;
+        min-width:120px;
         height:44px;
         line-height: 44px;
         color:silver;
@@ -256,6 +256,7 @@ export default {
 
     .UserEmail {
         color:rgb(8, 97, 30);
+        padding: 0 18px;
     }
 }
 .Form-position {

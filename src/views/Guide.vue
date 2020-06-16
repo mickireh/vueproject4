@@ -9,27 +9,41 @@
         </div>
         <div class="createGuideForm hide">
             <form>
-                <label for="guideCategory">Category</label>
-                <select v-model="guideCategory" id="guideCategory">
-                    <option v-for="category in this.guideCategories" v-bind:key="category">{{category}}</option>
-                </select>
-                <label for="guideCategoryNew">new Category</label>
-                <input type="text" id="guideCategoryNew" v-model="guideCategoryNew">
-                <label for="guideTitle">Title</label>
-                <input type="text" id="guideTitle" v-model="guideTitle">
-                <label for="guideContent">Content</label>
-                <textarea type="text" id="guideContent" v-model="guideContent"></textarea>
+                <div class="form-group">
+                    <label for="guideCategory">Category</label>
+                    <select v-model="guideCategory" id="guideCategory">
+                        <option></option>
+                        <option v-for="category in this.guideCategories" v-bind:key="category">{{category}}</option>
+                    </select>
+                    <label for="guideCategoryNew">new Category</label>
+                    <input type="text" id="guideCategoryNew" placeholder="new category.." v-model="guideCategoryNew">
+                    <p class="error" v-if="this.errors['category'] !== undefined">{{this.errors['category']}}</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="guideTitle">Title</label>
+                    <input type="text" id="guideTitle" placeholder="title.." v-model="guideTitle">
+                    <p class="error" v-if="this.errors['title'] !== undefined">{{this.errors['title']}}</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="guideContent">Content</label>
+                    <textarea type="text" id="guideContent" placeholder="content.." v-model="guideContent"></textarea>
+                    <label for="guideLink">Link</label>
+                    <input type="text" id="guideLink" placeholder="link.." v-model="guideLink">
+                    <p class="error" v-if="this.errors['content'] !== undefined">{{this.errors['content']}}</p>
+                </div>
+
                 <button @click="createGuide">Create Guide</button>
             </form>
-            
 
         </div>
-        
+
         <!-- passing probs through components / vuex gloabal state -->
         <!-- <div v-if="loggedIn == true">
             <span>Create Guide</span>
         </div> -->
-      
+
         <ul class="guideList">
 
         </ul>
@@ -54,7 +68,9 @@
                 guideContent: '',
                 guideCategories: [],
                 guideCategory: '',
-                guideCategoryNew: ''
+                guideCategoryNew: '',
+                guideLink: '',
+                errors: []
             }
         },
         created() {
@@ -77,7 +93,7 @@
                         }
                     }
                     // this.guideCategories.push(guide.category);
-                    console.log(this.guideCategories);
+                    // console.log(this.guideCategories);
 
 
                     var li = $('<li/>');
@@ -102,29 +118,51 @@
             createGuide: function() {
                 // console.log(this.guideTitle, this.guideContent);
                 if (firebase.auth().currentUser) {
-                    var vm = this;
+                    // var vm = this;
+                    this.errors = [];
 
-                    // var errors = [];
+                    if (this.guideCategory === '' && this.guideCategoryNew.trim() === '' ) {
+                        // console.log('empty');
+                        this.errors['category'] = 'Please select an already used category or define a new one. Thanks!';
+                    }
+
+                    if (this.guideCategory !== '' && this.guideCategoryNew.trim() !== '' && this.guideCategory !== this.guideCategoryNew.trim()) {
+                        this.errors['category'] = 'Please select either an already used category or define a new one, not both. Thanks!';
+                    }
+                    // console.log(this.guideCategory);   
+
+                    if (this.guideTitle.trim() === '') {
+                        this.errors['title'] = 'Please enter a title. Thanks!';
+                    }
+
+                    if (this.guideContent.trim() === '' && this.guideLink.trim() === '') {
+                        this.errors['content'] = 'Please provide either a bit of content or a link to an external site. Thanks!';
+                    }
+
+
+                    // console.log(this.errors);
+                    // console.log(this.errors['title']);
 
                     // Validation TODO
                     // not empty | not both category and categoryNew => guideCategory
 
-                    this.db.collection('guide').add({
-                        title: this.guideTitle,
-                        content: this.guideContent,
-                        category: this.guideCategory
-                    }).then(function() {
-                        console.log('guide created');
-                        // close and reset Form
-                        var createGuideForm = $('.createGuideForm');
-                        createGuideForm.addClass('hide');
-                        vm.guideTitle = '';
-                        vm.guideContent = '';
 
-                    }), function(err) {
-                        console.log(err.message);
+                    // this.db.collection('guide').add({
+                    //     title: this.guideTitle,
+                    //     content: this.guideContent,
+                    //     category: this.guideCategory
+                    // }).then(function() {
+                    //     console.log('guide created');
+                    //     // close and reset Form
+                    //     var createGuideForm = $('.createGuideForm');
+                    //     createGuideForm.addClass('hide');
+                    //     vm.guideTitle = '';
+                    //     vm.guideContent = '';
+
+                    // }), function(err) {
+                    //     console.log(err.message);
                         
-                    }
+                    // }
                 } else {
                     console.log('Log in');
                 }
@@ -133,12 +171,13 @@
             showCreateGuide: function() {
                 var createGuideForm = $('.createGuideForm');
                 createGuideForm.toggleClass('hide');
-                // close other Forms
+                // close other Forms, reset errors
                 // var signupForm = $('#signupForm');
                 // signupForm.addClass('hide');
                 // var loginForm = $('#loginForm');
                 // loginForm.addClass('hide');
                 this.closeForms();
+                this.errors = [];
             }
         },
         components: {
@@ -174,20 +213,25 @@
 
         animation: fadeIn .5s;
 
-        input, label, button {
+        input, label, button, select, option {
+            font-family: 'Montserrat', sans-serif;
             display: block;
             margin-top:10px;
             margin-left: auto;
             margin-right: auto;
         }
-        input {
+        input, select {
            padding:8px;
         }
+        input {
+            margin-bottom: 22px;
+        }
         textarea {
+            font-family: 'Montserrat', sans-serif;
             margin-top:10px;
             padding: 8px;
-            min-width: 400px;
-            min-height: 200px;
+            min-width: 300px;
+            min-height: 150px;
             border-radius: 4px;
         }
         button {
@@ -198,8 +242,15 @@
             width:131px;
             height:40px;
             margin-top: 10px;
+            margin-bottom: 10px;
         }
     }
+
+    .form-group {
+        position: relative;
+        border-bottom: 2px solid #444;
+    }
+
     .hide {
         display: none;
     }
@@ -210,6 +261,19 @@
         list-style: none;
         background-color: seashell;
     }
+
+    .error {
+        color:red;
+        position: absolute;
+        bottom:0;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0;
+        margin-bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
     @keyframes fadeIn {
     from {
         opacity: 0;
