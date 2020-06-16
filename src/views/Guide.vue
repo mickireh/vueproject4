@@ -9,6 +9,12 @@
         </div>
         <div class="createGuideForm hide">
             <form>
+                <label for="guideCategory">Category</label>
+                <select v-model="guideCategory" id="guideCategory">
+                    <option v-for="category in this.guideCategories" v-bind:key="category">{{category}}</option>
+                </select>
+                <label for="guideCategoryNew">new Category</label>
+                <input type="text" id="guideCategoryNew" v-model="guideCategoryNew">
                 <label for="guideTitle">Title</label>
                 <input type="text" id="guideTitle" v-model="guideTitle">
                 <label for="guideContent">Content</label>
@@ -45,7 +51,10 @@
                 db: firebase.firestore(),
                 loggedIn: false,
                 guideTitle: '',
-                guideContent: ''
+                guideContent: '',
+                guideCategories: [],
+                guideCategory: '',
+                guideCategoryNew: ''
             }
         },
         created() {
@@ -55,10 +64,21 @@
                 var guideList = $('.guideList');
                 guideList.empty();
                 
-                // get guides, append to ul
+                // get guides, get category in array (create if not exist) append to ul
                 guides.docs.forEach(doc => {
 
                     var guide = doc.data();
+
+                    if (this.guideCategories.length === 0) {
+                        this.guideCategories.push(guide.category);
+                    } else {
+                        if (this.guideCategories.includes(guide.category) === false) {
+                            this.guideCategories.push(guide.category);
+                        }
+                    }
+                    // this.guideCategories.push(guide.category);
+                    console.log(this.guideCategories);
+
 
                     var li = $('<li/>');
                     li.text(guide.title);
@@ -83,9 +103,16 @@
                 // console.log(this.guideTitle, this.guideContent);
                 if (firebase.auth().currentUser) {
                     var vm = this;
+
+                    // var errors = [];
+
+                    // Validation TODO
+                    // not empty | not both category and categoryNew => guideCategory
+
                     this.db.collection('guide').add({
                         title: this.guideTitle,
-                        content: this.guideContent
+                        content: this.guideContent,
+                        category: this.guideCategory
                     }).then(function() {
                         console.log('guide created');
                         // close and reset Form
