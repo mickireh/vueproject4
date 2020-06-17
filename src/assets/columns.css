@@ -1,0 +1,232 @@
+/*********************/
+/* COLUMN TEMPLATE */
+/* for up to 4 columns*/
+/* Michael Hirsch - noch zu kompliziert gedacht...
+still to do:
+ - klassennamen eher nach breiten angeben - col1_2, col1_3,col2_3 usw.
+ - weniger margin klassen und breiten über query anpassen
+ */
+
+/* wrapper mit clear */
+.clear {
+	clear:both;
+}
+.wrapper:after {
+	clear:both;
+	content:"";
+	display:table;
+}
+/****PADDINGS****/
+.pad1 {padding-left:1%;padding-right:1%;}
+.pad2 {padding-left:2%;padding-right:2%;}
+.pad3 {padding-left:3%;padding-right:3%;}
+
+/****MARGINS****/
+/*margins will be set to *0* for 1 column*/
+.margLeft1 {margin-left: 1%;}
+.margRight1 {margin-right: 1%;}
+.margLeft1r {margin-left: 1%;}
+.margRight1r {margin-right: 1%;}
+
+.margLeft2 {margin-left: 2%;}
+.margRight2 {margin-right: 2%;}
+
+/*.margLeft1_3{margin-left: 1.3333%;}
+.margRight1_3{margin-right: 1.3333%;}
+.margRight06r{margin-right: 0.6666667%;}
+.margLeft06r{margin-left: 0.6666667%;}*/
+
+.marg05 {margin-left: .5%;margin-right: .5%;}
+.marg1 {margin-left: 1%;margin-right: 1%;}
+.marg2 {margin-left: 2%;margin-right: 2%;}
+
+/***************/
+/**** 2 COLUMNS****/
+.col2 {
+	float: left;
+	width: 50%;
+}
+.col2.pad1 {width: 48%;}
+.col2.pad2 {width: 46%;}
+.col2.pad3 {width: 44%;}
+.col2.margRight1 {width: 49%;}
+.col2.margLeft1 {width: 49%;}
+.col2.marg1 {width:48%;}
+.col2.marg2 {width:46%;}
+.col2.pad1.margRight1 {width: 47%;}
+.col2.pad1.margLeft1 {width: 47%;}
+.col2.pad2.margRight1 {width: 45%;}
+.col2.pad2.margLeft1 {width: 45%;}
+.col2.pad3.margRight1 {width: 43%;}
+.col2.pad3.margLeft1 {width: 43%;}
+
+@media screen and (max-width:1000px) {
+	.col2 {width:100%;}
+	.col2.pad1 {width:98%;}
+	.col2.pad2 {width:96%;}
+	.col2.pad3 {width:94%;}
+	.col2.margRight1 {width:100%;margin-right:0}
+	.col2.margLeft1 {width:100%;margin-left:0}
+	.col2.marg1 {width:100%;margin-left:0;margin-right:0;}
+	.col2.marg2 {width:100%;margin-left:0;margin-right:0}
+	.col2.pad1.margRight1 {width:98%;}
+	.col2.pad1.margLeft1 {width:98%;}
+	.col2.pad2.margRight1 {width:96%;}
+	.col2.pad2.margLeft1 {width:96%;}
+	.col2.pad3.margRight1 {width:94%;}
+	.col2.pad3.margLeft1 {width:94%;}
+}
+
+/**** 3 COLUMNS****/
+.col3 {
+	float:left;
+	width: 33.3333%;
+}
+.col3.pad1 {width:31.3333%;}
+.col3.pad2 {width:29.3333%;}
+.col3.pad3 {width:27.3333%;}
+.col3.margRight1 {width:32.3333%;}
+.col3.margLeft1 {width:32.3333%;}
+.col3.marg05{width:32.3333%;}
+.col3.marg1 {width:31.3333%;}
+.col3.pad1.margRight1 {width:30.3333%;}
+.col3.pad1.margLeft1 {width:30.3333%;}
+.col3.pad1.marg05 {width:30.3333%;}
+.col3.pad2.margRight1 {width:28.3333%;}
+.col3.pad2.margLeft1 {width:28.3333%;}
+.col3.pad2.marg05 {width:28.3333%;}
+.col3.pad3.margRight1 {width:26.3333%;}
+.col3.pad3.margLeft1 {width:26.3333%;}
+.col3.pad3.marg05 {width:26.3333%;}
+
+
+@media screen and (max-width: 800px) {
+	.col3 {width:100%;}
+	.col3.pad1 {width:98%;}
+	.col3.margRight1 {width:100%;margin-right:0}
+	.col3.margLeft1 {width:100%;margin-left:0}
+	.col3.marg05{width:100%;margin:0;}
+	.col3.pad1.margRight1 {width:98%;}
+	.col3.pad1.margLeft1 {width:98%;}
+	.col3.pad1.marg05 {width:98%;}
+	.col3.pad2.margRight1 {width:96%;}
+	.col3.pad2.margLeft1 {width:96%;}
+	.col3.pad2.marg05 {width:96%;}
+	.col3.pad3.margRight1 {width:94%;}
+	.col3.pad3.margLeft1 {width:94%;}
+	.col3.pad3.marg05 {width:94%;}
+}
+
+/**** 4 COLUMNS****/
+
+.col4 {
+	float:left;
+	width: 25%;
+}
+.col4.pad1{width:23%;}
+.col4.pad2{width:21%;}
+.col4.pad3{width:19%;}
+
+.col4.margRight2{width:23.5%;}
+.col4.margLeft2{width:23.5%;}
+.col4.margRight1r{width:23.5%;}
+.col4.margLeft1r{width:23.5%;}
+
+.col4.margRight1_3{width:24%;}
+.col4.margLeft1_3{width:24%;}
+.col4.margRight06r{width:24%;}
+.col4.margLeft06r{width:24%;}
+
+@media screen and (max-width:1000px) {
+	.col4 {width:50%;}
+	.col4.pad1{width:48%;}
+	.col4.pad2{width:46%;}
+	.col4.pad3{width:44%;}
+
+	.col4.margRight2{width:48.5%;}
+	.col4.margLeft2{width:48.5%;}
+	.col4.margRight1r{width:48.5%;margin-right:0;margin-left:1%}
+	.col4.margLeft1r{width:48.5%;margin-left:0;margin-right:1%}
+
+	.col4.margRight1_3{width:49%;}
+	.col4.margLeft1_3{width:49%;}
+	.col4.margRight06r{width:49%;margin-right:0;margin-left:0.6666667%}
+	.col4.margLeft06r{width:49%;margin-left:0;margin-right:0.6666667%}
+}
+@media screen and (max-width:600px) {
+	.col4 {width:100%;}
+	.col4.pad1{width:98%;}
+	.col4.pad2{width:96%;}
+	.col4.pad3{width:94%;}
+
+	.col4.margRight2{width:100%;margin-right: 0}
+	.col4.margLeft2{width:100%;margin-left: 0}
+	.col4.margRight1r{width:100%;margin-left:0}
+	.col4.margLeft1r{width:100%;margin-right:0}
+
+	.col4.margRight1_3{width:100%;margin-right:0}
+	.col4.margLeft1_3{width:100%;margin-left:0}
+	.col4.margRight06r{width:100%;}
+	.col4.margLeft06r{width:100%;}
+}
+
+
+/* 5 Spalten */
+.col5 {
+	float:left;
+	width:18%;
+	margin-right: 1%;
+	margin-left: 1%;
+}
+
+/* 6 Spalten */
+.col6 {
+	float:left;
+	width:15%;
+	margin-right: .83333%;
+	margin-left: .83333%;
+}
+
+.col1_20p1 {
+	float:left;
+	width:18%;
+	padding:1%;
+	/* padding-left:1%;
+	padding-right:1%; */
+}
+.col1_30p1 {
+	float:left;
+	width:28%;
+	padding:1%;
+}
+.col1_70p1 {
+	float:left;
+	width:68%;
+	padding:1%;
+}
+.col1_80p1 {
+	float:left;
+	width:78%;
+	padding-left:1%;
+	padding-right:1%;
+}
+
+@media screen and (max-width:1200px) {
+	.col1_20p1 {
+		float:none;
+		width:98%;
+	}
+	.col1_30p1 {
+		float:none;
+		width:98%;
+	}
+	.col1_70p1 {
+		float:none;
+		width:98%;
+	}
+	.col1_80p1 {
+		float:none;
+		width:98%;
+	}
+
+}

@@ -43,10 +43,18 @@
         <!-- <div v-if="loggedIn == true">
             <span>Create Guide</span>
         </div> -->
+        <div class="clear wrapper">
+            <div class="col1_20p1 categories">
+                <h3>Categories:</h3>
+                <ul>
 
-        <ul class="guideList">
+                </ul>
+            </div>
+            <ul class="guideList col1_80p1">
 
-        </ul>
+            </ul>
+        </div>
+        
     </div>
 </template>
 
@@ -79,6 +87,9 @@
                 // get ul, empty out
                 var guideList = $('.guideList');
                 guideList.empty();
+                var categoryList = $('.categories ul');
+                categoryList.empty();
+                // console.log(categoryList);
                 
                 // get guides, get category in array (create if not exist) append to ul
                 guides.docs.forEach(doc => {
@@ -87,13 +98,33 @@
 
                     if (this.guideCategories.length === 0) {
                         this.guideCategories.push(guide.category);
+                        var categoryLi = $('<li/>').text(guide.category);
+                        categoryList.append(categoryLi);
                     } else {
                         if (this.guideCategories.includes(guide.category) === false) {
                             this.guideCategories.push(guide.category);
+                            categoryLi = $('<li/>').text(guide.category);
+                            categoryList.append(categoryLi);
                         }
                     }
                     // this.guideCategories.push(guide.category);
                     // console.log(this.guideCategories);
+
+
+
+                    // <div class="guideList">
+                    //     article class="{{guide.category}}"
+                    //          ul
+                    //              li guide entry
+                    //              li guide entry
+                    //      article class="CSS"
+                    //          ul
+                    //              li guide entry
+                    //       article class="HTML"
+                    //          ul
+                    //              li 
+
+
 
 
                     var li = $('<li/>');
@@ -101,12 +132,25 @@
                     var content = $('<p/>').text(guide.content);
                     li.append(content);
                     guideList.append(li);
+
+                    
                 })
             }, function(err) {
                 console.log(err.message);
-            }
+            });
 
-            );
+            // console.log(this.guideCategories);
+
+            // does not work! either
+
+            // for (let category of this.guideCategories) {
+            //     console.log(category);
+            // }
+            // this.guideCategories.forEach(function(category, index) {
+            //     console.log(category, index);
+            //     console.log('what');
+            // });
+
         },
         methods: {
             closeForms: () => {
@@ -199,10 +243,31 @@
         }
     }
 
+    .guideList {
+        margin: 0;
+        list-style: none;
+        background-color: seashell;
+    }
+    .categories {
+        h3 {
+            margin-top: 0;
+            color:seashell;
+        }
+        ul {
+            list-style-type: none;
+            color:seashell;
+            text-align: right;
+            font-size: 30px;
+        }
+        ul li {
+            margin-top:10px;
+        }
+    }
     .createGuideForm {
         position: absolute;
         background-color: rgba($color: #222, $alpha: .89);
-        border-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
         width: 60%;
         color:seashell;
 
@@ -253,13 +318,6 @@
 
     .hide {
         display: none;
-    }
-
-    .guideList {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        background-color: seashell;
     }
 
     .error {

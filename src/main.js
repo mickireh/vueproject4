@@ -5,6 +5,9 @@ import firebase from 'firebase'
 import 'firebase/auth'
 import store from './store'
 
+// global css
+import './assets/columns.css'
+
 Vue.config.productionTip = false
 
 const firebaseConfig = {
