@@ -50,9 +50,9 @@
 
                 </ul>
             </div>
-            <ul class="guideList col1_80p1">
+            <div class="guideList col1_80p1">
 
-            </ul>
+            </div>
         </div>
         
     </div>
