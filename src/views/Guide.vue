@@ -2,7 +2,7 @@
     <div>
         <Login />
         <div class="guideHeader">
-            <h3>Guides</h3>
+            <h1>Guides</h1>
             <div class="createGuide">
                 <span @click="showCreateGuide">Create Guide</span>
             </div>
@@ -78,7 +78,7 @@
                 guideCategory: '',
                 guideCategoryNew: '',
                 guideLink: '',
-                errors: []
+                errors: {}
             }
         },
         created() {
@@ -88,7 +88,7 @@
                 var guideList = $('.guideList');
                 guideList.empty();
                 var categoryList = $('.categories ul');
-                categoryList.empty();
+                // categoryList.empty();
                 // console.log(categoryList);
                 
                 // get guides, get category in array (create if not exist) append to ul
@@ -96,42 +96,65 @@
 
                     var guide = doc.data();
 
-                    if (this.guideCategories.length === 0) {
+                    // get category (put in array (maybe not necessary?) create left overview)
+                    // also create article sections with class? named after category
+                    // if (this.guideCategories.length === 0) {
+                    //     this.guideCategories.push(guide.category);
+                    //     var categoryLi = $('<li/>').text(guide.category);
+                    //     categoryList.append(categoryLi);
+                    // } else {
+                    if (this.guideCategories.includes(guide.category) === false) {
                         this.guideCategories.push(guide.category);
                         var categoryLi = $('<li/>').text(guide.category);
                         categoryList.append(categoryLi);
-                    } else {
-                        if (this.guideCategories.includes(guide.category) === false) {
-                            this.guideCategories.push(guide.category);
-                            categoryLi = $('<li/>').text(guide.category);
-                            categoryList.append(categoryLi);
-                        }
+
+                        let article = $('<article/>');
+                        let h3guideCategory = $('<h3/>').text(guide.category);
+                        let ulguideCategory = $('<ul/>').addClass(guide.category);
+                        article.append(h3guideCategory);
+                        article.append(ulguideCategory);
+                        guideList.append(article);
                     }
-                    // this.guideCategories.push(guide.category);
+                    // }
+
                     // console.log(this.guideCategories);
 
 
 
                     // <div class="guideList">
                     //     article class="{{guide.category}}"
+                    //          h3 guide category
                     //          ul
                     //              li guide entry
                     //              li guide entry
                     //      article class="CSS"
+                    //          h3 guide category
                     //          ul
                     //              li guide entry
                     //       article class="HTML"
+                    //          h3 guide category
                     //          ul
                     //              li 
 
 
+                    // get all articles, if article hasClass "guideCategory" append
+                    var articlesAll = $('.guideList ul');
+                    // console.log(articlesAll);
+
+                    articlesAll.each(function() {
+                        // console.log(this);
+
+                        if($(this).hasClass(guide.category)) {
+                            // console.log($(this));
+                            var li = $('<li/>');
+                            li.text(guide.title);
+                            var content = $('<p/>').text(guide.content);
+                            li.append(content);
+                            $(this).append(li);
+                        }
+                    });
 
 
-                    var li = $('<li/>');
-                    li.text(guide.title);
-                    var content = $('<p/>').text(guide.content);
-                    li.append(content);
-                    guideList.append(li);
 
                     
                 })
@@ -141,7 +164,7 @@
 
             // console.log(this.guideCategories);
 
-            // does not work! either
+            // does not work! either of them
 
             // for (let category of this.guideCategories) {
             //     console.log(category);
@@ -162,8 +185,8 @@
             createGuide: function() {
                 // console.log(this.guideTitle, this.guideContent);
                 if (firebase.auth().currentUser) {
-                    // var vm = this;
-                    this.errors = [];
+                    var vm = this;
+                    this.errors = {};
 
                     if (this.guideCategory === '' && this.guideCategoryNew.trim() === '' ) {
                         // console.log('empty');
@@ -184,29 +207,39 @@
                     }
 
 
+                    if (this.guideCategory === '' && this.guideCategoryNew.trim() !== '' ) {
+                        this.guideCategory = this.guideCategoryNew;
+                    }
                     // console.log(this.errors);
                     // console.log(this.errors['title']);
 
                     // Validation TODO
                     // not empty | not both category and categoryNew => guideCategory
 
+                    console.log(this.errors);
+                    // checking if object errors is empty with jQuery
+                    if ($.isEmptyObject(this.errors)) {
 
-                    // this.db.collection('guide').add({
-                    //     title: this.guideTitle,
-                    //     content: this.guideContent,
-                    //     category: this.guideCategory
-                    // }).then(function() {
-                    //     console.log('guide created');
-                    //     // close and reset Form
-                    //     var createGuideForm = $('.createGuideForm');
-                    //     createGuideForm.addClass('hide');
-                    //     vm.guideTitle = '';
-                    //     vm.guideContent = '';
+                        this.db.collection('guide').add({
+                            title: this.guideTitle,
+                            content: this.guideContent,
+                            category: this.guideCategory
+                        }).then(function() {
+                            console.log('guide created');
+                            // close and reset Form
+                            var createGuideForm = $('.createGuideForm');
+                            createGuideForm.addClass('hide');
+                            vm.guideTitle = '';
+                            vm.guideContent = '';
 
-                    // }), function(err) {
-                    //     console.log(err.message);
-                        
-                    // }
+                        }), function(err) {
+                            console.log(err.message);
+                            
+                        }
+
+
+                    }
+                   
                 } else {
                     console.log('Log in');
                 }
@@ -221,7 +254,7 @@
                 // var loginForm = $('#loginForm');
                 // loginForm.addClass('hide');
                 this.closeForms();
-                this.errors = [];
+                this.errors = {};
             }
         },
         components: {
@@ -233,6 +266,7 @@
 <style lang="scss" scoped>
     .guideHeader {
         position: relative;
+        color: seashell;
     }
     .createGuide {
         position: absolute;
