@@ -271,7 +271,7 @@ export default {
     background-color: rgba($color: #222, $alpha: .9);
     border-radius: 5px;
     padding:5px;
-    z-index: 1;
+    z-index: 10;
 
     // transition: opacity 1s ease;
 
@@ -315,7 +315,7 @@ export default {
     background-color: rgba($color: #222, $alpha: .9);
     border-radius: 5px;
     padding:5px;
-    z-index: 1;
+    z-index: 10;
 
     animation: fadeIn .5s;
 

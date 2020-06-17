@@ -282,6 +282,14 @@
         list-style: none;
         background-color: seashell;
     }
+
+    .guideList::v-deep ul {
+        margin: 0;
+        padding:0;
+        list-style-type: none;
+        border-bottom: 2px solid #444;
+    }
+
     .categories {
         h3 {
             margin-top: 0;
@@ -304,6 +312,7 @@
         border-bottom-left-radius: 5px;
         width: 60%;
         color:seashell;
+        z-index: 1;
 
         margin-left: auto;
         margin-right: auto;
