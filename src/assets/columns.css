@@ -60,7 +60,7 @@ still to do:
 .col2.pad3.margRight1 {width: 43%;}
 .col2.pad3.margLeft1 {width: 43%;}
 
-@media screen and (max-width:1000px) {
+@media screen and (max-width:749px) {
 	.col2 {width:100%;}
 	.col2.pad1 {width:98%;}
 	.col2.pad2 {width:96%;}
@@ -100,7 +100,7 @@ still to do:
 .col3.pad3.marg05 {width:26.3333%;}
 
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 749px) {
 	.col3 {width:100%;}
 	.col3.pad1 {width:98%;}
 	.col3.margRight1 {width:100%;margin-right:0}
@@ -153,7 +153,7 @@ still to do:
 	.col4.margRight06r{width:49%;margin-right:0;margin-left:0.6666667%}
 	.col4.margLeft06r{width:49%;margin-left:0;margin-right:0.6666667%}
 }
-@media screen and (max-width:600px) {
+@media screen and (max-width:749px) {
 	.col4 {width:100%;}
 	.col4.pad1{width:98%;}
 	.col4.pad2{width:96%;}
@@ -211,7 +211,7 @@ still to do:
 	padding-right:1%;
 }
 
-@media screen and (max-width:1200px) {
+@media screen and (max-width:949px) {
 	.col1_20p1 {
 		float:none;
 		width:98%;

@@ -1,10 +1,14 @@
 <template>
   <div class="home">
     <Login />
-    <div class="spinner">
-        <img alt="Vue logo" src="../assets/logo.png" class="imageSpin">
+    <div class="clear wrapper">
+      <div class="col2">
+          <img alt="Vue logo" src="../assets/logo.png" class="imageSpin">
+      </div>
+      <div class="col2">
+          <img alt="Vue logo" src="../assets/firebaselogo.png" class="imageSpin" height="200">
+      </div>
     </div>
-    
     <HelloWorld msg="Welcome to Your Vue.js App"/>
     
   </div>

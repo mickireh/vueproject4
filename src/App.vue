@@ -33,7 +33,7 @@ body {
 
 nav {
   padding: 30px;
-
+  font-size:16px;
   background-color: $navBackground;
 
   ul {
@@ -48,9 +48,13 @@ nav {
   a {
     font-weight: bold;
     color: #2c3e50;
+    text-decoration: none;
 
     &.router-link-exact-active {
       color: #42b983;
+    }
+    &:hover {
+      background-color: #bbb;
     }
   }
 }
