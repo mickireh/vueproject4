@@ -1,5 +1,10 @@
 # vueproject4
 
+vue project and firebase (auth and firestore)
+- Portfolio and projects for learning
+            - learning guide 
+            - wetherapp api
+
 ## Project setup
 ```
 npm install
