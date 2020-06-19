@@ -107,12 +107,13 @@
                         this.guideCategories.push(guide.category);
                         var categoryLi = $('<li/>');
                         var categoryAnchor = $('<a/>').text(guide.category);
-                        categoryAnchor.attr('href','#' + guide.category);
+                        // categoryAnchor.attr('v-on:click','goto('+guide.category+')');
+                        // this.$on('click',this.goto (guide.category));
                         categoryLi.append(categoryAnchor);
                         categoryList.append(categoryLi);
 
                         let article = $('<article/>');
-                        article.attr('id',guide.category);
+                        article.attr('ref',guide.category);
                         let h3guideCategory = $('<h3/>').text(guide.category);
                         let ulguideCategory = $('<ul/>').addClass(guide.category);
                         article.append(h3guideCategory);
@@ -196,6 +197,11 @@
                 var loginForm = $('#loginForm');
                 loginForm.addClass('hide');
             },
+            goto(refName) {
+                var element = this.$refs[refName];
+                console.log(element);
+                element.scrollIntoView();
+            },
             createGuide: function() {
                 // console.log(this.guideTitle, this.guideContent);
                 if (firebase.auth().currentUser) {
@@ -234,9 +240,6 @@
                     // console.log(this.errors);
                     // console.log(this.errors['title']);
 
-                    // Validation TODO
-                    // not empty | not both category and categoryNew => guideCategory
-
                     console.log(this.errors);
                     // checking if object errors is empty with jQuery
                     if ($.isEmptyObject(this.errors)) {
@@ -253,18 +256,22 @@
                             createGuideForm.addClass('hide');
                             vm.guideTitle = '';
                             vm.guideContent = '';
+                            vm.guideCategory = '';
+                            vm.guideLink = '';
 
                             // TODO try redirect, refresh page because of unwanted behavior with onSnapshot
+                            // reload entire page, not perfect but needed
+                            vm.$router.go(); 
 
+                            // vm.$router.push(); NO
+                            // vm.$router.push(''guide); NO, error: redundant routing :( )
+                            // vm.$forceUpdate(); NO
 
                         }), function(err) {
                             console.log(err.message);
                             
                         }
-
-
                     }
-                   
                 } else {
                     console.log('Log in');
                 }
