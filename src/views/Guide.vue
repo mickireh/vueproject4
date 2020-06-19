@@ -105,10 +105,14 @@
                     // } else {
                     if (this.guideCategories.includes(guide.category) === false) {
                         this.guideCategories.push(guide.category);
-                        var categoryLi = $('<li/>').text(guide.category);
+                        var categoryLi = $('<li/>');
+                        var categoryAnchor = $('<a/>').text(guide.category);
+                        categoryAnchor.attr('href','#' + guide.category);
+                        categoryLi.append(categoryAnchor);
                         categoryList.append(categoryLi);
 
                         let article = $('<article/>');
+                        article.attr('id',guide.category);
                         let h3guideCategory = $('<h3/>').text(guide.category);
                         let ulguideCategory = $('<ul/>').addClass(guide.category);
                         article.append(h3guideCategory);
@@ -122,7 +126,7 @@
 
 
                     // <div class="guideList">
-                    //     article class="{{guide.category}}"
+                    //     article id="{{guide.category}}" class="{{guide.category}}"
                     //          h3 guide category
                     //          ul
                     //              li guide entry
@@ -146,10 +150,20 @@
 
                         if($(this).hasClass(guide.category)) {
                             // console.log($(this));
+
                             var li = $('<li/>');
                             li.text(guide.title);
                             var content = $('<p/>').text(guide.content);
                             li.append(content);
+
+                            // if link is there
+                            if (guide.link) {
+                                var a = $('<a/>').text(guide.link);
+                                a.attr('href',guide.link);
+                                li.append(a);
+
+                            }
+                            
                             $(this).append(li);
                         }
                     });
@@ -188,25 +202,32 @@
                     var vm = this;
                     this.errors = {};
 
+                    // both categories empty
                     if (this.guideCategory === '' && this.guideCategoryNew.trim() === '' ) {
                         // console.log('empty');
                         this.errors['category'] = 'Please select an already used category or define a new one. Thanks!';
                     }
 
+                    // both categories not empty and not the same
                     if (this.guideCategory !== '' && this.guideCategoryNew.trim() !== '' && this.guideCategory !== this.guideCategoryNew.trim()) {
                         this.errors['category'] = 'Please select either an already used category or define a new one, not both. Thanks!';
                     }
                     // console.log(this.guideCategory);   
 
+                    // title empty
                     if (this.guideTitle.trim() === '') {
                         this.errors['title'] = 'Please enter a title. Thanks!';
                     }
 
+                    // content empty , should always be there, even if link is provided for defining at least the link
+                    // TODO
+
+                    // both content and link empty
                     if (this.guideContent.trim() === '' && this.guideLink.trim() === '') {
                         this.errors['content'] = 'Please provide either a bit of content or a link to an external site. Thanks!';
                     }
 
-
+                    // for the adding to the database, only one category "field" needed
                     if (this.guideCategory === '' && this.guideCategoryNew.trim() !== '' ) {
                         this.guideCategory = this.guideCategoryNew;
                     }
@@ -223,7 +244,8 @@
                         this.db.collection('guide').add({
                             title: this.guideTitle,
                             content: this.guideContent,
-                            category: this.guideCategory
+                            category: this.guideCategory,
+                            link: this.guideLink
                         }).then(function() {
                             console.log('guide created');
                             // close and reset Form
@@ -231,6 +253,9 @@
                             createGuideForm.addClass('hide');
                             vm.guideTitle = '';
                             vm.guideContent = '';
+
+                            // TODO try redirect, refresh page because of unwanted behavior with onSnapshot
+
 
                         }), function(err) {
                             console.log(err.message);
