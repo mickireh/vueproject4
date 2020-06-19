@@ -47,7 +47,7 @@
             <div class="col1_20p1 categories">
                 <h3>Categories:</h3>
                 <ul>
-
+                    <li v-for="category in this.guideCategories" v-bind:key="category" @click="goto(category)">{{category}}></li>
                 </ul>
             </div>
             <div class="guideList col1_80p1">
@@ -107,13 +107,23 @@
                         this.guideCategories.push(guide.category);
                         var categoryLi = $('<li/>');
                         var categoryAnchor = $('<a/>').text(guide.category);
+
+                        // anchor is ofc not working in vue for jump marks, 
+                        // dynamically add event handler with scrollintoView(ref) to the links
+                        // next try via component => get list, go thrpugh list, display list
+                        // ? how to pass the referenced element
+                        // to access refs they need to be rendered!!! mounted() $nextTick...
+                        // solved
+                        // render list via v-for, then just get the element for scrollintoView!!!!!
+
                         // categoryAnchor.attr('v-on:click','goto('+guide.category+')');
                         // this.$on('click',this.goto (guide.category));
+
                         categoryLi.append(categoryAnchor);
                         categoryList.append(categoryLi);
 
                         let article = $('<article/>');
-                        article.attr('ref',guide.category);
+                        article.attr('id',guide.category);
                         let h3guideCategory = $('<h3/>').text(guide.category);
                         let ulguideCategory = $('<ul/>').addClass(guide.category);
                         article.append(h3guideCategory);
@@ -169,9 +179,6 @@
                         }
                     });
 
-
-
-                    
                 })
             }, function(err) {
                 console.log(err.message);
@@ -180,7 +187,6 @@
             // console.log(this.guideCategories);
 
             // does not work! either of them
-
             // for (let category of this.guideCategories) {
             //     console.log(category);
             // }
@@ -192,15 +198,20 @@
         },
         methods: {
             closeForms: () => {
+                // try via store
                 var signupForm = $('#signupForm');
                 signupForm.addClass('hide');
                 var loginForm = $('#loginForm');
                 loginForm.addClass('hide');
             },
             goto(refName) {
-                var element = this.$refs[refName];
-                console.log(element);
-                element.scrollIntoView();
+                // var element = this.$refs[refName];
+                var element = $('#'+refName);
+                // console.log(this.$refs.refName);
+                // console.log(refName);
+                // YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYEEEEEEEEEEEEEEEEEEESSSSSSSSSSSSSSSSSSS!
+                // console.log($('#'+refName));
+                element[0].scrollIntoView({behavior:"smooth"});
             },
             createGuide: function() {
                 // console.log(this.guideTitle, this.guideContent);
