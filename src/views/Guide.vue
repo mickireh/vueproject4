@@ -169,16 +169,22 @@
                             // console.log($(this));
 
                             var li = $('<li/>');
-                            li.text(guide.title);
-                            var content = $('<p/>').text(guide.content);
-                            li.append(content);
+                            var h4 = $('<h4/>').text(guide.title);
+                            li.append(h4);
 
+                            // if content
+                            if (guide.content) {
+                                var content = $('<p/>').text(guide.content);
+                                li.append(content);
+                            }
+                            
                             // if link is there
                             if (guide.link) {
                                 var a = $('<a/>').text(guide.link);
                                 a.attr('href',guide.link);
+                                a.attr('title',guide.title);
+                                a.attr('target','_blank');
                                 li.append(a);
-
                             }
                             
                             $(this).append(li);
@@ -242,9 +248,6 @@
                         this.errors['title'] = 'Please enter a title. Thanks!';
                     }
 
-                    // content empty , should always be there, even if link is provided for defining at least the link
-                    // TODO
-
                     // both content and link empty
                     if (this.guideContent.trim() === '' && this.guideLink.trim() === '') {
                         this.errors['content'] = 'Please provide either a bit of content or a link to an external site. Thanks!';
@@ -277,7 +280,9 @@
                             vm.guideLink = '';
 
                             // TODO try redirect, refresh page because of unwanted behavior with onSnapshot
-                            // reload entire page, not perfect but needed
+                            // goes against the idea of using Vue in the first place... noob
+                            // solution? : extra component, get data, render the component
+                            // reload entire page, not perfect but needed with this model
                             vm.$router.go(); 
 
                             // vm.$router.push(); NO
@@ -356,15 +361,35 @@
     .guideList {
         margin: 0;
         list-style: none;
-        background-color: seashell;
-    }
+        background-color: #eee;
 
-    .guideList::v-deep ul {
+        &::v-deep ul {
         margin: 0;
         padding:0;
         list-style-type: none;
-        border-bottom: 2px solid #444;
+        border-bottom: 2px solid #aaa;
+        }
+
+        &::v-deep ul li {
+            margin-bottom:20px;
+            padding:10px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            box-shadow: 3px 3px #ccc;
+        }
+        &::v-deep ul li h4 {
+            margin:0;
+            text-align:left;
+            padding-left:20px;
+        }
     }
+
+    // .guideList::v-deep ul {
+    //     margin: 0;
+    //     padding:0;
+    //     list-style-type: none;
+    //     border-bottom: 2px solid #aaa;
+    // }
 
     .categories {
         h3 {
