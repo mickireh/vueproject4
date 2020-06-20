@@ -44,17 +44,20 @@
             <span>Create Guide</span>
         </div> -->
         <div class="clear wrapper">
-            <div class="col1_20p1 categories">
-                <h3>Categories:</h3>
-                <ul>
-                    <li v-for="category in this.guideCategories" v-bind:key="category" @click="goto(category)">{{category}}></li>
-                </ul>
+            <div class="col1_20p1">
+                <div class="categories">
+                    <h3>Categories:</h3>
+                    <ul>
+                        <li v-for="category in this.guideCategories" v-bind:key="category" @click="goto(category)">{{category}}</li>
+                    </ul>
+                </div>
             </div>
             <div class="guideList col1_80p1">
 
             </div>
         </div>
-        
+        <button id="backToTop" title="Back to the top" @click="backToTop()">&uarr;</button>
+        <!-- <button id="backToTop" title="Back to the top" @click="backToTop()">Top</button> -->
     </div>
 </template>
 
@@ -78,16 +81,19 @@
                 guideCategory: '',
                 guideCategoryNew: '',
                 guideLink: '',
-                errors: {}
+                errors: {},
+                sticky: '212'
             }
         },
         created() {
+
+            window.addEventListener('scroll', this.handleScroll);
 
             this.db.collection('guide').onSnapshot(guides => {
                 // get ul, empty out
                 var guideList = $('.guideList');
                 guideList.empty();
-                var categoryList = $('.categories ul');
+                // var categoryList = $('.categories ul');
                 // categoryList.empty();
                 // console.log(categoryList);
                 
@@ -105,8 +111,8 @@
                     // } else {
                     if (this.guideCategories.includes(guide.category) === false) {
                         this.guideCategories.push(guide.category);
-                        var categoryLi = $('<li/>');
-                        var categoryAnchor = $('<a/>').text(guide.category);
+                        // var categoryLi = $('<li/>');
+                        // var categoryAnchor = $('<a/>').text(guide.category);
 
                         // anchor is ofc not working in vue for jump marks, 
                         // dynamically add event handler with scrollintoView(ref) to the links
@@ -119,8 +125,8 @@
                         // categoryAnchor.attr('v-on:click','goto('+guide.category+')');
                         // this.$on('click',this.goto (guide.category));
 
-                        categoryLi.append(categoryAnchor);
-                        categoryList.append(categoryLi);
+                        // categoryLi.append(categoryAnchor);
+                        // categoryList.append(categoryLi);
 
                         let article = $('<article/>');
                         article.attr('id',guide.category);
@@ -209,7 +215,7 @@
                 var element = $('#'+refName);
                 // console.log(this.$refs.refName);
                 // console.log(refName);
-                // YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYEEEEEEEEEEEEEEEEEEESSSSSSSSSSSSSSSSSSS!
+
                 // console.log($('#'+refName));
                 element[0].scrollIntoView({behavior:"smooth"});
             },
@@ -298,6 +304,30 @@
                 // loginForm.addClass('hide');
                 this.closeForms();
                 this.errors = {};
+            },
+            handleScroll () {
+                var categoriesMenu = $('.categories');
+                var backToTopBtn = $('#backToTop');
+                // var sticky = categoriesMenu[0].offsetTop;
+                // console.log(this.sticky);
+                if (window.pageYOffset >= this.sticky) {
+                    categoriesMenu.addClass("sticky");
+                    backToTopBtn.css('display','block');
+                    // console.log(window.innerWidth);
+                    if (window.innerWidth > 1000) {
+                        categoriesMenu.css("width",'18%');
+                    } else {
+                        categoriesMenu.css("width",'');
+                    }
+                } else {
+                    categoriesMenu.removeClass("sticky");
+                    categoriesMenu.css("width",'');
+                    backToTopBtn.css('display','none');
+                }
+            },
+            backToTop () {
+                document.body.scrollTop = 0; // For Safari
+                document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             }
         },
         components: {
@@ -307,6 +337,9 @@
 </script>
 
 <style lang="scss" scoped>
+    .relative {
+        position: relative;
+    }
     .guideHeader {
         position: relative;
         color: seashell;
@@ -346,7 +379,15 @@
         }
         ul li {
             margin-top:10px;
+            cursor: pointer;
         }
+    }
+    .col1_20p1 {
+        min-height:1px;
+    }
+    .sticky {
+        position: fixed;
+        top:0;
     }
     .createGuideForm {
         position: absolute;
@@ -418,6 +459,19 @@
         right: 0;
     }
 
+    #backToTop {
+        display: none;
+        position: fixed;
+        background-color: seashell;
+        border-radius: 5px;
+        bottom: 30px;
+        left: 9%;
+        line-height: 40px;
+        font-size: 25px;
+        width: 40px;
+        height: 40px;
+    }
+
     @keyframes fadeIn {
     from {
         opacity: 0;
@@ -425,5 +479,18 @@
     to {
         opacity: 1;
     }
+    }
+    @media screen and (max-width:1000px) {
+        .categories {
+            width:100%;
+            background-color: #333;
+            ul li {
+                display:inline-block;
+                background-color: #333;
+            }
+        }
+        .sticky {
+            width:100%;
+        }
     }
 </style>

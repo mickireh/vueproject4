@@ -157,7 +157,7 @@ export default {
 <style scoped lang="scss">
 .UserLogging {
     position: absolute;
-    top: 30px;
+    top: 26px;
     right: 40px;
     text-align: center;
     font-weight: 300;

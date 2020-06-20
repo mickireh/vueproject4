@@ -10,6 +10,8 @@ import './assets/columns.css'
 
 Vue.config.productionTip = false
 
+// get from seperate file config.js, .gitignore that config,
+// because of security issues when pushing, thx github
 const firebaseConfig = {
   apiKey: "AIzaSyDOLLUAM17atS9VLfgfQqLPVRcFtDpy4mM",
   authDomain: "mickireh.firebaseapp.com",
