@@ -46,7 +46,11 @@ export default {
             } else {
                 this.loggedIn = false;
             }
-        })
+        });
+        window.addEventListener(
+            'resize',
+            this.showWindowSize
+        );
     },
     data() {
         return {
@@ -149,7 +153,21 @@ export default {
                 console.log(err.message);
             });
             
-        }
+        },
+        // showWindowSize() {
+        //     // console.log(window.innerWidth);
+        //     var UserLoggingUi = $('.UserLogging ul')
+        //     if (window.innerWidth <= 765 ) {
+        //         // console.log(UserLoggingUi);
+        //         // console.log(UserLoggingUi.children());
+        //         UserLoggingUi.children().each((index, li) => {
+        //             console.log(li);
+        //             UserLoggingUi.css('display', 'none');
+        //         });
+        //     } else {
+        //         UserLoggingUi.css('display', 'flex');
+        //     }
+        // }
     }
 }
 </script>

@@ -56,7 +56,7 @@
 
             </div>
         </div>
-        <button id="backToTop" title="Back to the top" @click="backToTop()">&uarr;</button>
+        <button id="backToTop" class="btn-secondary" title="Back to the top" @click="backToTop()">&uarr;</button>
         <!-- <button id="backToTop" title="Back to the top" @click="backToTop()">Top</button> -->
     </div>
 </template>
@@ -82,10 +82,19 @@
                 guideCategoryNew: '',
                 guideLink: '',
                 errors: {},
-                sticky: '212'
+                sticky: '124'
             }
         },
+        // computed: {
+        //     windowWidth() {
+        //         return this.$store.state.windowWidth;
+        //     }
+        // },
         created() {
+            // window.addEventListener(
+            //     'resize',
+            //     this.showWindowSize
+            // );
 
             window.addEventListener('scroll', this.handleScroll);
 
@@ -334,8 +343,18 @@
             backToTop () {
                 document.body.scrollTop = 0; // For Safari
                 document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-            }
+            },
+            // showWindowSize() {
+            //     console.log(window.innerWidth);
+            // }
         },
+        // watch: {
+        //     windowWidth: function() {
+        //         if (this.windowWidth === 768) {
+        //         console.log('The window width is 768px');
+        //         }
+        //     }
+        // },
         components: {
             Login
         }
@@ -496,14 +515,14 @@
     #backToTop {
         display: none;
         position: fixed;
-        background-color: seashell;
-        border-radius: 5px;
+        // background-color: seashell;
+        // border-radius: 5px;
         bottom: 30px;
         left: 5%;
-        line-height: 40px;
-        font-size: 25px;
-        width: 40px;
-        height: 40px;
+        line-height: 30px;
+        font-size: 20px;
+        width: 30px;
+        height: 30px;
     }
 
     @keyframes fadeIn {

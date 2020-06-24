@@ -42,6 +42,23 @@
   </div>
 </template>
 
+<script>
+export default {
+  // created() {
+  //   window.addEventListener(
+  //     'resize',
+  //     this.$store.commit('setWindowWidth')
+  //   )
+  // },
+  // watch: {
+  //   windowWidth: function() {
+  //     if (this.windowWidth === 768) {
+  //       console.log('The window width is 768px');
+  //     }
+  //   }
+  // }
+}
+</script>
 
 <style lang="scss">
 $backgroundC: #333;
