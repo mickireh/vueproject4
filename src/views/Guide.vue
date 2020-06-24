@@ -44,15 +44,15 @@
             <span>Create Guide</span>
         </div> -->
         <div class="clear wrapper">
-            <div class="col1_20p1">
-                <div class="categories">
+            <div class="col1_15">
+                <div class="categories p-2">
                     <h3>Categories:</h3>
                     <ul>
                         <li v-for="category in this.guideCategories" v-bind:key="category" @click="goto(category)">{{category}}</li>
                     </ul>
                 </div>
             </div>
-            <div class="guideList col1_80p1">
+            <div class="guideList col1_85">
 
             </div>
         </div>
@@ -317,10 +317,11 @@
                 // console.log(this.sticky);
                 if (window.pageYOffset >= this.sticky) {
                     categoriesMenu.addClass("sticky");
+                    categoriesMenu.css('box-sizing','border-box');
                     backToTopBtn.css('display','block');
                     // console.log(window.innerWidth);
                     if (window.innerWidth > 1000) {
-                        categoriesMenu.css("width",'18%');
+                        categoriesMenu.css("width",'15%');
                     } else {
                         categoriesMenu.css("width",'');
                     }
@@ -342,6 +343,10 @@
 </script>
 
 <style lang="scss" scoped>
+    *, *:after, *:before {
+        box-sizing: content-box;
+    }
+
     .relative {
         position: relative;
     }
@@ -359,13 +364,14 @@
     }
 
     .guideList {
+        box-sizing: content-box;
         margin: 0;
         list-style: none;
         background-color: #eee;
 
         &::v-deep ul {
         margin: 0;
-        padding:0;
+        padding:1rem;
         list-style-type: none;
         border-bottom: 2px solid #aaa;
         }
@@ -394,20 +400,23 @@
     .categories {
         h3 {
             margin-top: 0;
+            font-size: 20px;
             color:seashell;
         }
         ul {
+            margin:0;
             list-style-type: none;
+            list-style-position: inside;
             color:seashell;
             text-align: right;
-            font-size: 30px;
+            font-size: 16px;
         }
         ul li {
             margin-top:10px;
             cursor: pointer;
         }
     }
-    .col1_20p1 {
+    .col1_15 {
         min-height:1px;
     }
     .sticky {
@@ -510,7 +519,7 @@
             width:100%;
             background-color: #333;
             ul li {
-                display:inline-block;
+                // display:inline-block;
                 background-color: #333;
             }
         }

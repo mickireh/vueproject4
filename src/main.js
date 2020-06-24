@@ -5,6 +5,9 @@ import firebase from 'firebase'
 import 'firebase/auth'
 import store from './store'
 
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 // global css
 import './assets/columns.css'
 

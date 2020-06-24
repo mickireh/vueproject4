@@ -194,7 +194,56 @@ still to do:
 		width:100%;
 	}
 }
+/* others */
+.col1_10 {
+	float:left;
+	width:10%;
+}
+.col1_15 {
+	float:left;
+	width:15%;
+}
+.col1_20 {
+	float:left;
+	width:20%;
+}
+.col1_25 {
+	float:left;
+	width:25%;
+}
+.col1_30 {
+	float:left;
+	width:30%;
+}
+.col1_40 {
+	float:left;
+	width:40%;
+}
+.col1_60 {
+	float:left;
+	width:60%;
 
+}
+.col1_70 {
+	float:left;
+	width:70%;
+}
+.col1_75 {
+	float:left;
+	width:75%;
+}
+.col1_80 {
+	float:left;
+	width:80%;
+}
+.col1_85 {
+	float:left;
+	width:85%;
+}
+.col1_90 {
+	float:left;
+	width:90%;
+}
 /* padding1 */
 .col1_20p1 {
 	float:left;
@@ -270,6 +319,10 @@ still to do:
 	margin-right:1%;
 }
 @media screen and (max-width:1000px) {
+	.col1_10,.col1_15,.col1_20,.col1_25,.col1_30,.col1_40,.col1_60,.col1_70,.col1_75,.col1_80,.col1_85,.col1_90 {
+		float:none;
+		width:100%;
+	}
 	.col1_20p1,.col1_30p1,.col1_40p1,.col1_60p1,.col1_70p1,.col1_80p1,.col1_20m1,.col1_30m1,.col1_40m1,.col1_60m1,.col1_70m1,.col1_80m1 {
 		float:none;
 		width:98%;
