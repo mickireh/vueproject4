@@ -499,7 +499,7 @@
         background-color: seashell;
         border-radius: 5px;
         bottom: 30px;
-        left: 9%;
+        left: 5%;
         line-height: 40px;
         font-size: 25px;
         width: 40px;

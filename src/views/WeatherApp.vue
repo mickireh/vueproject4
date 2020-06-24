@@ -67,7 +67,7 @@ import Login from '@/components/Login.vue';
 
 <style lang="scss" scoped>
 .weatherApp {
-    min-height: calc(100vh - 161px);
+    min-height: calc(100vh - 106px);
     font-family: 'Montserrat', sans-serif;
 }
 

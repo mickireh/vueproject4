@@ -157,7 +157,7 @@ export default {
 <style scoped lang="scss">
 .UserLogging {
     position: absolute;
-    top: 26px;
+    top: 14px;
     right: 40px;
     text-align: center;
     font-weight: 300;
@@ -265,7 +265,7 @@ export default {
 }
 #loginForm {
     position:absolute;
-    top:131px;
+    top:76px;
     right:40px;
     width: 200px;
     background-color: rgba($color: #222, $alpha: .9);
@@ -305,7 +305,7 @@ export default {
 #signupForm {
     position: absolute;
     width:300px;
-    top: 131px;
+    top: 76px;
 
     margin-left: auto;
     margin-right: auto;
