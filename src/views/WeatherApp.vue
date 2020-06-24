@@ -1,6 +1,5 @@
 <template>
     <div >
-        <Login />
         <div class="weatherApp">
             <div class="search-box">
                 <input
@@ -27,7 +26,6 @@
 </template>
 
 <script>
-import Login from '@/components/Login.vue';
 
     export default {
         name: 'WeatherApp',
@@ -46,7 +44,7 @@ import Login from '@/components/Login.vue';
                     .then(response => {
                         return response.json();
                     }).then(this.setResults);
-                    console.log('ok');
+                    // console.log('ok');
                 }
                 
             },
@@ -58,9 +56,6 @@ import Login from '@/components/Login.vue';
                 var date = new Date;
                 return date.toDateString();
             }
-        },
-        components: {
-            Login
         }
     }
 </script>

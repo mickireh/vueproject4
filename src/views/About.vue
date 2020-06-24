@@ -1,6 +1,5 @@
 <template>
     <div class="about">
-        <Login />
         <div class="headlineAbout">
             <h1><span class="headline-line1">Full</span><br>
                 <span class="headline-line2">Sta<span class="headlinetext-part1">ck</span><span class="headlinetext-part2">g</span></span><br>
@@ -13,13 +12,9 @@
 </template>
 
 <script>
-import Login from '@/components/Login.vue'
 
 export default {
-    name: 'About',
-    components: {
-        Login
-    }
+    name: 'About'
 }
 </script>
 

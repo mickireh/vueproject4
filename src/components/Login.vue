@@ -12,9 +12,9 @@
         <div id="loginForm" v-if="showLoginSwitch == true">
             <form>
                 <label for="loginEmail">Email</label>
-                <input id="loginEmail" type="email" v-model="loginEmail">
+                <input id="loginEmail" type="email" v-model="loginEmail" placeholder="email">
                 <label for="loginPassword">Password</label>
-                <input id="loginPassword" type="password" v-model="loginPassword">
+                <input id="loginPassword" type="password" v-model="loginPassword" placeholder="password">
                 <button @click="loginbtn">Login</button>
             </form>
         </div>

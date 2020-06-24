@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Login/>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
       <!-- <a class="navbar-brand" href="#">Expand at md</a> -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,10 +10,10 @@
       <div class="collapse navbar-collapse" id="navbarsExample04">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <router-link class="nav-link" to="/">Home</router-link>
+            <router-link to="/">Home</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/about">About</router-link>
+            <router-link to="/about">About</router-link>
           </li>
           <!-- <li class="nav-item">
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
@@ -43,6 +44,7 @@
 </template>
 
 <script>
+import Login from '@/components/Login.vue';
 export default {
   // created() {
   //   window.addEventListener(
@@ -57,6 +59,9 @@ export default {
   //     }
   //   }
   // }
+  components: {
+    Login
+  }
 }
 </script>
 
@@ -66,6 +71,7 @@ $navBackground: #ccc;
 
 body {
   margin: 0;
+
 }
 #app {
   font-family: 'Roboto', Helvetica, Arial, sans-serif;
@@ -76,6 +82,7 @@ body {
   background-color: $backgroundC;
 
   position: relative;
+  min-height: 100vh;
 }
 
 nav {
@@ -93,15 +100,19 @@ nav {
   }
 
   a {
-    padding: 10px 10px;
-    color: #2c3e50;
+    display:block;
+    padding: 0.5rem 0.5rem;
+
+    color: rgba(255,255,255,.5);
     text-decoration: none;
 
     &.router-link-exact-active {
       color: #42b983;
     }
     &:hover {
-      background-color: #bbb;
+      text-decoration: none;
+      color: rgba(255,255,255,.75);
+      background-color: #333;
     }
   }
 }

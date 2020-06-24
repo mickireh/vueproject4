@@ -1,6 +1,5 @@
 <template>
     <div>
-        <Login />
         <div class="guideHeader">
             <h1>Guides</h1>
             <div class="createGuide">
@@ -62,7 +61,6 @@
 </template>
 
 <script>
-    import Login from '@/components/Login.vue';
     import $ from 'jquery';
     import firebase from 'firebase';
     import 'firebase/auth';
@@ -177,7 +175,7 @@
                         if($(this).hasClass(guide.category)) {
                             // console.log($(this));
 
-                            var li = $('<li/>');
+                            var li = $('<li/>').addClass('shadow');
                             var h4 = $('<h4/>').text(guide.title);
                             li.append(h4);
 
@@ -347,7 +345,7 @@
             // showWindowSize() {
             //     console.log(window.innerWidth);
             // }
-        },
+        }
         // watch: {
         //     windowWidth: function() {
         //         if (this.windowWidth === 768) {
@@ -355,9 +353,6 @@
         //         }
         //     }
         // },
-        components: {
-            Login
-        }
     }
 </script>
 
@@ -400,7 +395,6 @@
             padding:10px;
             border: 1px solid #aaa;
             border-radius: 5px;
-            box-shadow: 3px 3px #ccc;
         }
         &::v-deep ul li h4 {
             margin:0;
@@ -516,7 +510,7 @@
         display: none;
         position: fixed;
         // background-color: seashell;
-        // border-radius: 5px;
+        border-radius: 5px;
         bottom: 30px;
         left: 5%;
         line-height: 30px;
