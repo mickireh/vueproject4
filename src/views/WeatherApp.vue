@@ -1,8 +1,9 @@
 <template>
-    <div class="container mt-2">
-        <h1>Weather Api</h1>
+<div class="weatherApp">
+    <div class="container">
+        <h1 class="pt-2">Weather Api</h1>
         <p>provided by <a href="https://openweathermap.org/">openweathermap.org</a></p>
-        <div class="weatherApp">
+        <div>
             <div class="search-box form-label-group">
                 <input
                     id="enterCity"
@@ -14,7 +15,7 @@
                 >
                 <label for="enterCity">Enter City...</label>
             </div>
-            <div class="weather-wrap" v-if="typeof weather.main != 'undefined'">
+            <div class="weather-wrap pt-2" v-if="typeof weather.main != 'undefined'">
                 <div class="location-box">
                     <div class="location">{{weather.name}}, {{weather.sys.country}}</div>
                     <div class="date">{{ getDate() }}</div>
@@ -27,10 +28,11 @@
             </div>
         </div>
     </div>
+</div>
 </template>
 
 <script>
-
+import $ from 'jquery';
     export default {
         name: 'WeatherApp',
         data() {
@@ -38,16 +40,47 @@
                 api_key:'b0d730e2ac94cd220ea9e5f67fa131a4',
                 url_base: 'https://api.openweathermap.org/data/2.5/',
                 query: '',
-                weather: {}
+                weather: {},
+                imageClasses: [
+                    'clear',
+                    'clouds',
+                    'rain',
+                    'snow'
+                ]
             }
         },
         methods: {
             fetchWeather (e) {
                 if(e.key == "Enter") {
-                    fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`)
-                    .then(response => {
-                        return response.json();
-                    }).then(this.setResults);
+                    if (this.query.trim() === '') {
+                        // console.log('empty');
+                        this.weather = {};
+                        this.setBackground();
+                    } else {
+                        fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`)
+                        .then(response => {
+                            if (response.ok) {
+                                return this. weather = response.json();
+                            } else {
+                                // throw new Error('Something went wrong');
+                                return Promise.reject();
+                                // console.log('response');
+                                // return;
+                                
+                            }
+                            // console.log(response);
+                            // return response.json();
+                            // return this. weather = response.json();
+                        // }).then(this.setResults);
+                        }).then( data => {
+                            // console.log('Success:', data);
+                            this.setResults(data);
+                            
+                        }).catch(() => {
+                            console.error('Error: City not found');
+                        });
+                    }
+
                     // console.log('ok');
                 }
                 
@@ -55,10 +88,29 @@
             setResults (results) {
                 this.weather = results;
                 // console.log(this.weather);
+                this.setBackground();
             },
             getDate () {
                 var date = new Date;
                 return date.toDateString();
+            },
+            setBackground() {
+                var weatherAppDiv = $('.weatherApp');
+                $.each(this.imageClasses, function (indexInArray, valueOfElement) {
+                     weatherAppDiv.removeClass(valueOfElement);
+                });
+                if (!($.isEmptyObject(this.weather))) {
+                    if (this.weather.weather[0].main === 'Clouds') {
+                        weatherAppDiv.addClass('clouds');
+                    } else if (this.weather.weather[0].main === 'Rain'){
+                        weatherAppDiv.addClass('rain');
+                    } else if (this.weather.weather[0].main === 'Clear'){
+                        weatherAppDiv.addClass('clear');
+                    } else if (this.weather.weather[0].main === 'Snow'){
+                        weatherAppDiv.addClass('snow');
+                    }
+                }
+
             }
         }
     }
@@ -72,6 +124,20 @@ h1, p {
 .weatherApp {
     min-height: calc(100vh - 106px);
     font-family: 'Montserrat', sans-serif;
+    // background-image: url('../assets/clouds.jpg');
+    background-size:cover;
+}
+.clouds {
+    background-image: url('../assets/clouds.jpg');
+}
+.rain {
+    background-image: url('../assets/rain.jpg');
+}
+.clear {
+    background-image: url('../assets/clear.jpg');
+}
+.snow {
+    background-image: url('../assets/snow.jpg');
 }
 
 .search-box {
@@ -84,7 +150,14 @@ h1, p {
         padding:10px;
         font-size: 40px;
         border-radius: 5px;
+        opacity: .9;
     }
+}
+
+.weather-wrap {
+    background-color: rgba($color: #fff, $alpha: .25);
+    border-radius: 10px;
+    display: inline-block;
 }
 
 .location-box {
@@ -105,8 +178,8 @@ h1, p {
         padding: 10px 25px;
         margin: 20px 0px;
 
-        background-color: rgba($color: #fff, $alpha: .25);
-        border-radius: 10px;
+        // background-color: rgba($color: #fff, $alpha: .25);
+        // border-radius: 10px;
     }
     .weather {
         font-size: 32px;
