@@ -1,14 +1,18 @@
 <template>
-    <div >
+    <div class="container mt-2">
+        <h1>Weather Api</h1>
+        <p>provided by <a href="https://openweathermap.org/">openweathermap.org</a></p>
         <div class="weatherApp">
-            <div class="search-box">
+            <div class="search-box form-label-group">
                 <input
+                    id="enterCity"
                     type="text"
-                    class="weather_search"
+                    class="weather_search form-control"
                     placeholder="Enter City..."
                     v-model="query"
                     v-on:keypress="fetchWeather"
                 >
+                <label for="enterCity">Enter City...</label>
             </div>
             <div class="weather-wrap" v-if="typeof weather.main != 'undefined'">
                 <div class="location-box">
@@ -61,6 +65,10 @@
 </script>
 
 <style lang="scss" scoped>
+h1, p {
+    color:rgba($color: #fff, $alpha: .75)
+}
+
 .weatherApp {
     min-height: calc(100vh - 106px);
     font-family: 'Montserrat', sans-serif;
@@ -104,5 +112,65 @@
         font-size: 32px;
 
     }
+}
+
+.form-label-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+
+.form-label-group > label {
+//   height: 3.125rem;
+  padding: .95rem;
+}
+
+.form-label-group > label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  margin-bottom: 0; /* Override default `<label>` margin */
+  line-height: 1.5;
+  font-size: 27px;
+  color: #495057;
+  pointer-events: none;
+  cursor: text; /* Match the input under the label */
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  transition: all .1s ease-in-out;
+}
+
+.form-label-group input::-webkit-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input:-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-moz-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::placeholder {
+  color: transparent;
+}
+
+.form-label-group input:not(:placeholder-shown) {
+  padding-top: 1.25rem;
+  padding-bottom: .25rem;
+}
+
+.form-label-group input:not(:placeholder-shown) ~ label {
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+  font-size: 14px;
+  color: #777;
 }
 </style>
