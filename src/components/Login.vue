@@ -190,7 +190,7 @@ export default {
         cursor: pointer;
         min-width:120px;
         height:44px;
-        line-height: 44px;
+        // line-height: 44px;
         color:silver;
 
         // animation: fadeIn .5s;
@@ -378,4 +378,19 @@ export default {
         opacity: 1;
     }
 }
+
+@media screen and (max-width:767px) {
+        .UserLogging {
+            position:static;
+            ul {
+                display:block;
+            }
+        }
+        #loginForm {
+            top:324px;
+        }
+        #signupForm {
+            top:324px;
+        }
+    }
 </style>
