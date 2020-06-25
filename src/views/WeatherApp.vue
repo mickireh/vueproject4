@@ -15,7 +15,7 @@
                 >
                 <label for="enterCity">Enter City...</label>
             </div>
-            <div class="weather-wrap pt-2" v-if="typeof weather.main != 'undefined'">
+            <div class="weather-wrap p-2" v-if="typeof weather.main != 'undefined'">
                 <div class="location-box">
                     <div class="location">{{weather.name}}, {{weather.sys.country}}</div>
                     <div class="date">{{ getDate() }}</div>
