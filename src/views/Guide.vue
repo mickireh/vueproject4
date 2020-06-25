@@ -1,9 +1,12 @@
 <template>
     <div>
         <div class="guideHeader">
-            <h1>Guides</h1>
-            <div class="createGuide">
+            <h1 class="p-3">Guides</h1>
+            <div class="createGuide" v-if="user.loggedIn">
                 <span @click="showCreateGuide">Create Guide</span>
+            </div>
+            <div class="createGuide" v-else>
+                <span>Log in to create Guide</span>
             </div>
         </div>
         <div class="createGuideForm hide">
@@ -66,6 +69,8 @@
     import 'firebase/auth';
     import 'firebase/firestore';
 
+    import { mapGetters } from "vuex";
+
     // console.log(firebase);
     export default {
         name: 'guide',
@@ -83,11 +88,11 @@
                 sticky: '124'
             }
         },
-        // computed: {
-        //     windowWidth() {
-        //         return this.$store.state.windowWidth;
-        //     }
-        // },
+        computed: {
+            ...mapGetters({
+                user: "user"
+            })
+        },
         created() {
             // window.addEventListener(
             //     'resize',
@@ -326,7 +331,7 @@
                     categoriesMenu.addClass("sticky");
                     categoriesMenu.css('box-sizing','border-box');
                     backToTopBtn.css('display','block');
-                    // console.log(window.innerWidth);
+
                     if (window.innerWidth > 1000) {
                         categoriesMenu.css("width",'15%');
                     } else {
@@ -382,6 +387,10 @@
         margin: 0;
         list-style: none;
         background-color: #eee;
+
+        &::v-deep h3 {
+            padding-top: 1rem;
+        }
 
         &::v-deep ul {
             margin: 0;

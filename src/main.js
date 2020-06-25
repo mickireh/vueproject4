@@ -28,6 +28,11 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+
+firebase.auth().onAuthStateChanged(user => {
+  store.dispatch("fetchUser", user);
+});
+
 let app;
 
 // firebase.auth before creating app to have user before; refreshing page issues when logged in
@@ -40,6 +45,13 @@ firebase.auth().onAuthStateChanged(() => {
     }).$mount('#app')
   }
 });
+
+
+// new Vue({
+//   router,
+//   store,
+//   render: h => h(App)
+// }).$mount('#app')
 
 
 

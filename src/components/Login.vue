@@ -2,7 +2,7 @@
     <div>
         <div class="UserLogging">
             <ul>
-                <li class="UserEmail user-li-log" v-if="loggedIn == true">{{ this.user }}</li>
+                <li class="user-li-log" v-if="loggedIn == true">{{ this.user }}</li>
                 <li class="second-li-log" v-on:click="logout" v-if="loggedIn == true">Logout</li>
                 <li class="first-li-log" v-on:click="showLogin" v-if="loggedIn == false">Login</li>
                 <li class="second-li-log" v-on:click="showSignup" v-if="loggedIn == false">Signup</li>
@@ -219,6 +219,10 @@ export default {
         z-index: -1;
     }
 
+    .user-li-log {
+        color:rgb(8, 97, 30);
+    }
+
     .user-li-log:after {
         content: '';
         position: absolute;
@@ -272,10 +276,6 @@ export default {
         background:#555;
     }
 
-    .UserEmail {
-        color:rgb(8, 97, 30);
-        padding: 0 18px;
-    }
 }
 .Form-position {
     position: relative;
