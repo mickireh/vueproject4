@@ -58,7 +58,7 @@
 
             </div>
         </div>
-        <button id="backToTop" class="btn-secondary" title="Back to the top" @click="backToTop()">&uarr;</button>
+        <button id="backToTop" class="btn-secondary" title="Back to the top" @click="backToTop()"></button>
         <!-- <button id="backToTop" title="Back to the top" @click="backToTop()">Top</button> -->
     </div>
 </template>
@@ -532,8 +532,12 @@
         left: 5%;
         line-height: 30px;
         font-size: 20px;
-        width: 30px;
-        height: 30px;
+        width: 25px;
+        height: 35px;
+        background-image: url('../assets/dbl_arrow_up.png');
+        background-repeat: no-repeat;
+        background-size: 30px 32px;
+        background-position: 4px 2px;
     }
 
     @keyframes fadeIn {

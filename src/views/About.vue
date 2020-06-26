@@ -1,5 +1,6 @@
 <template>
     <div class="about">
+        <span class="headlineNote">learning to be a</span>
         <div class="headlineAbout">
             <h1><span class="headline-line1">Full</span><br>
                 <span class="headline-line2">Sta<span class="headlinetext-part1">ck</span><span class="headlinetext-part2">g</span></span><br>
@@ -19,6 +20,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .headlineNote {
+        display: inline-block;
+        width: 300px;
+        margin-left:auto;
+        margin-right:auto;
+        text-align: left;
+        color:#486b8e;
+        padding-top: 0.75rem;
+    }
     .headlineAbout {
         position: relative;
         width: 300px;
