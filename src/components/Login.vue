@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <li>
         <div class="UserLogging">
             <ul>
                 <li class="user-li-log" v-if="loggedIn == true">{{ this.user }}</li>
@@ -28,7 +28,7 @@
             </form>
         </div>
        
-    </div>
+    </li>
 </template>
 
 <script>
@@ -81,6 +81,29 @@ export default {
             this.showLoginSwitch = false;
             // console.log(this.showLoginBool);
             this.showSignupSwitch = !this.showSignupSwitch;
+
+            // error removal, dunno how to get err.message as global
+            // for now remove error p when show forms
+
+            // vue does not (because of DOM structure prolly; form inside this div) see those forms as dirfferent elements, so it does not change the p, because its not changed. 
+            // still.. code below does not work either. 
+            var formp = $('#signupForm form p');
+            $(formp).detach();
+        },
+        showLogin: function() {
+            // var loginForm = $('#loginForm');
+            // loginForm.toggleClass('hide');
+
+            // var signupForm = $('#signupForm');
+            // signupForm.addClass('hide');
+            this.showLoginSwitch = !this.showLoginSwitch;
+            // console.log(this.showLoginBool);
+            this.showSignupSwitch = false;
+
+
+            // var formp = $('#loginForm p');
+            // $(formp).detach();
+
         },
         signupbtn: function() {
             // cuz of scoping vm(view-model to this)
@@ -108,16 +131,6 @@ export default {
             }
             );
         },
-        showLogin: function() {
-            // var loginForm = $('#loginForm');
-            // loginForm.toggleClass('hide');
-
-            // var signupForm = $('#signupForm');
-            // signupForm.addClass('hide');
-            this.showLoginSwitch = !this.showLoginSwitch;
-            // console.log(this.showLoginBool);
-            this.showSignupSwitch = false;
-        },
         loginbtn: function() {
 
             var vm = this;
@@ -128,19 +141,29 @@ export default {
                 // vm.loggedIn = true;
                 var loginForm = $('#loginForm');
                 loginForm.addClass('hide');
-            },
-            function(err) {
+            }).catch((err) => {
+                console.log(err.message);
                 if (vm.loginEmail.trim() === '') {
                     err.message = 'empty';
+                    console.log(err.message);
                 }
-                // $('#loginForm p').detach();
-                // var error = $('<p/>').text(err.message);
-                // error.css('color','red');
-                // error.insertAfter('#loginForm button');
                 var formp = $('#loginForm p');
                 var formbtn = $('#loginForm button')
                 vm.setError(err, formp, formbtn);
             });
+            // },
+            // function(err) {
+            //     if (vm.loginEmail.trim() === '') {
+            //         err.message = 'empty';
+            //     }
+            //     // $('#loginForm p').detach();
+            //     // var error = $('<p/>').text(err.message);
+            //     // error.css('color','red');
+            //     // error.insertAfter('#loginForm button');
+            //     var formp = $('#loginForm p');
+            //     var formbtn = $('#loginForm button')
+            //     vm.setError(err, formp, formbtn);
+            // });
         },
         logout: function() {
             // var vm = this;

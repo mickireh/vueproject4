@@ -99,6 +99,9 @@
             //     this.showWindowSize
             // );
 
+            // adds event to window, after leaving this page, still on window, remove event
+            // destroy() lifecycle 
+            // better beforeDestroy()
             window.addEventListener('scroll', this.handleScroll);
 
             this.db.collection('guide').onSnapshot(guides => {
@@ -327,6 +330,13 @@
                 var backToTopBtn = $('#backToTop');
                 // var sticky = categoriesMenu[0].offsetTop;
                 // console.log(this.sticky);
+
+                // collapse Navbar fpr mobile
+                var NavBtn = $('.navbar-toggler')
+                NavBtn.addClass('collapsed');
+                var NavBar = $('.navbar-collapse');
+                NavBar.removeClass('show');
+
                 if (window.pageYOffset >= this.sticky) {
                     categoriesMenu.addClass("sticky");
                     categoriesMenu.css('box-sizing','border-box');
@@ -350,7 +360,10 @@
             // showWindowSize() {
             //     console.log(window.innerWidth);
             // }
-        }
+        },
+        beforeDestroy() {
+            window.removeEventListener('scroll', this.handleScroll);
+        },
         // watch: {
         //     windowWidth: function() {
         //         if (this.windowWidth === 768) {
@@ -537,7 +550,8 @@
         background-image: url('../assets/dbl_arrow_up.png');
         background-repeat: no-repeat;
         background-size: 30px 32px;
-        background-position: 4px 2px;
+        background-position: 5px 2px;
+        opacity: .8;
     }
 
     @keyframes fadeIn {

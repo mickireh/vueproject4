@@ -7,6 +7,9 @@
       <div class="col2">
           <img alt="Vue logo" src="../assets/firebaselogo.png" class="imageSpin" height="200">
       </div>
+      <!-- <div class="col3">
+          <img alt="Vue logo" src="../assets/bootstrap-stack.png" class="imageSpin" height="200">
+      </div> -->
     </div>
     <HelloWorld msg="Welcome to Your Vue.js App"/>
     
