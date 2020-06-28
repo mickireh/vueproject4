@@ -78,6 +78,7 @@
             return {
                 db: firebase.firestore(),
                 loggedIn: false,
+                guides: [],
                 guideTitle: '',
                 guideContent: '',
                 guideCategories: [],
@@ -114,8 +115,17 @@
                 
                 // get guides, get category in array (create if not exist) append to ul
                 guides.docs.forEach(doc => {
+                    // console.log(doc.data());
+                    // console.log(doc.id);
 
                     var guide = doc.data();
+
+                    guide["id"] = doc.id
+
+                    // this.guides.push(guide,doc.id);
+                    this.guides.push(guide);
+                    console.log(this.guides);
+
 
                     // get category (put in array (maybe not necessary?) create left overview)
                     // also create article sections with class? named after category
@@ -207,11 +217,17 @@
                     });
 
                 })
+
+
+
+
             }, function(err) {
                 console.log(err.message);
             });
 
             // console.log(this.guideCategories);
+
+
 
             // does not work! either of them
             // for (let category of this.guideCategories) {
@@ -542,14 +558,14 @@
         // background-color: seashell;
         border-radius: 5px;
         bottom: 30px;
-        left: 5%;
+        left: 6%;
         line-height: 30px;
         font-size: 20px;
-        width: 25px;
-        height: 35px;
+        width: 20px;
+        height: 30px;
         background-image: url('../assets/dbl_arrow_up.png');
         background-repeat: no-repeat;
-        background-size: 30px 32px;
+        background-size: 25px 25px;
         background-position: 5px 2px;
         opacity: .8;
     }
