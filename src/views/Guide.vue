@@ -124,7 +124,7 @@
 
                     // this.guides.push(guide,doc.id);
                     this.guides.push(guide);
-                    console.log(this.guides);
+                    // console.log(this.guides);
 
 
                     // get category (put in array (maybe not necessary?) create left overview)
@@ -211,6 +211,11 @@
                                 a.attr('target','_blank');
                                 li.append(a);
                             }
+
+                            var editlink = $('<a/>');
+                            editlink.text('edit');
+                            editlink.attr('href','#/guide/edit/' + guide.id);
+                            li.append(editlink);
                             
                             $(this).append(li);
                         }

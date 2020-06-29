@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Guide from '../views/Guide.vue'
 import WeatherApp from '../views/WeatherApp.vue'
+import Edit from '../views/Edit.vue'
 
 Vue.use(VueRouter)
 
@@ -24,6 +25,11 @@ Vue.use(VueRouter)
     path: '/guide',
     name: 'Guide',
     component: Guide
+  },
+  {
+    path: '/guide/edit/:guideId',
+    name: 'Edit',
+    component: Edit
   },
   {
     path: '/weatherapp',
