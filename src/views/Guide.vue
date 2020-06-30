@@ -105,6 +105,7 @@
             // better beforeDestroy()
             window.addEventListener('scroll', this.handleScroll);
 
+            // var vm = this;
             this.db.collection('guide').onSnapshot(guides => {
                 // get ul, empty out
                 var guideList = $('.guideList');
@@ -193,7 +194,7 @@
                         if($(this).hasClass(guide.category)) {
                             // console.log($(this));
 
-                            var li = $('<li/>').addClass('shadow');
+                            var li = $('<li/>').addClass('shadow guide-list-item');
                             var h4 = $('<h4/>').text(guide.title);
                             li.append(h4);
 
@@ -212,10 +213,18 @@
                                 li.append(a);
                             }
 
-                            var editlink = $('<a/>');
-                            editlink.text('edit');
-                            editlink.attr('href','#/guide/edit/' + guide.id);
-                            li.append(editlink);
+                            // edit link, bot with router-link TODO try
+                            // if user, not like this
+                            // if (vm.user.loggedin) {
+                            //     var editlink = $('<a/>').addClass('edit-link');
+                            //     editlink.text('edit');
+                            //     editlink.attr('href','#/guide/edit/' + guide.id);
+                            //     li.append(editlink);
+                            // }
+                            // var editlink = $('<a/>').addClass('edit-link');
+                            // editlink.text('edit');
+                            // editlink.attr('href','#/guide/edit/' + guide.id);
+                            // li.append(editlink);
                             
                             $(this).append(li);
                         }
@@ -438,20 +447,25 @@
             padding:10px;
             border: 1px solid #aaa;
             border-radius: 5px;
+            position: relative;
         }
         &::v-deep ul li h4 {
             margin:0;
             text-align:left;
             padding-left:20px;
         }
+        &::v-deep ul li a.edit-link{
+            position: absolute;
+            right: 4px;
+            bottom: 4px;
+        }
     }
 
-    // .guideList::v-deep ul {
-    //     margin: 0;
-    //     padding:0;
-    //     list-style-type: none;
-    //     border-bottom: 2px solid #aaa;
-    // }
+    .edit-link {
+        position: absolute;
+        right: 4px;
+        bottom: 4px;
+    }
 
     .categories {
         h3 {
