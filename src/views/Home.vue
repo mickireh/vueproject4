@@ -24,13 +24,13 @@
           <!-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg> -->
           <div class="container">
             <div class="carousel-caption text-left clear wrapper">
-              <div class="col2">
+              <div class="col2 align-center">
                 <img alt="Vue logo" src="../assets/logo.png" class="imageSpin">
               </div>
               <div class="col2">
                 <h1>Vue.js</h1>
-                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+                <p>Vue (pronounced /vjuː/, like view) is a progressive framework for building user interfaces. Unlike other monolithic frameworks, Vue is designed from the ground up to be incrementally adoptable.</p>
+                <p><a class="btn btn-lg btn-vue" href="https://vuejs.org/" role="button" target="_blank">Vuejs.org</a></p>
               </div>
             </div>
           </div>
@@ -44,8 +44,8 @@
               </div>
               <div class="col2">
                 <h1>Firebase</h1>
-                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+                <p>Build apps fast, without managing infrastructure</p>
+                <p><a class="btn btn-lg btn-firebase" href="https://firebase.google.com/" role="button" target="_blank">firebase.com</a></p>
               </div>
             </div>
           </div>
@@ -56,22 +56,22 @@
             <div class="carousel-caption text-right">
               <div class="col2">
                 <h1>Bootstrap</h1>
-                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+                <p>Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+                <p><a class="btn btn-lg btn-bootstrap" href="https://getbootstrap.com/" role="button" target="_blank">Bootstrap.com</a></p>
               </div>
-              <div class="col2">
+              <div class="col2 align-center">
                 <img alt="Bootstrap logo" src="../assets/bootstrap-stack.png" height="200">
               </div>
             </div>
           </div>
         </div>
-        <div class="carousel-item">
+        <div class="carousel-item background-stag">
           <!-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg> -->
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>About me</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><router-link to="/about" class="btn btn-lg btn-primary" role="button">About</router-link></p>
+          <div class="container ">
+            <div class="carousel-caption carousel-about">
+              <h1 class="text-secondary">About me</h1>
+              <!-- <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p> -->
+              <p><router-link to="/about" class="btn btn-lg btn-about" role="button">About</router-link></p>
             </div>
           </div>
         </div>
@@ -153,6 +153,47 @@ export default {
   // color: $carousel-caption-color;
   text-align: center;
 }
+.align-center {
+  text-align: center !important;
+}
+.btn-vue {
+  background-color: #42b983;
+}
+.btn-vue:hover {
+  background-color: #2c3e50;
+  color: #42b983;
+}
+.btn-firebase {
+  background-color: #ffcc2f;
+}
+.btn-firebase:hover {
+  background-color: #f5820c;
+}
+.btn-bootstrap {
+  background-color: #7844c5;
+}
+.btn-bootstrap:hover {
+  background-color: #341463;
+  color: #eee;
+}
+.btn-about {
+  background-color: #ccc;
+  opacity: .65;
+}
+.btn-about:hover {
+  background-color: #42281f;
+  color:#eee;
+  opacity: .65;
+}
+.background-stag {
+  background-image: url('../assets/hirsch.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.carousel-about {
+  padding-bottom: 9rem !important;
+}
 @media screen and (max-width:767px) {
   .carousel-caption {
     position: static;
@@ -161,8 +202,7 @@ export default {
     text-align: center !important;
   }
   .carousel-item {
-    height: 30rem;
+    min-height: 35rem;
   }
 }
-
 </style>
