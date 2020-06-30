@@ -447,7 +447,7 @@
             padding:10px;
             border: 1px solid #aaa;
             border-radius: 5px;
-            position: relative;
+            // position: relative;
         }
         &::v-deep ul li h4 {
             margin:0;
