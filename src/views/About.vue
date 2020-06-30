@@ -7,7 +7,20 @@
                 <span class="headline-line3">Dev</span>
             </h1>
         </div>
-        
+        <table class="table table-bordered">
+            <tr>
+                <td class="text-left">name</td>
+                <td class="text-right">Georg Simon Michael Hirsch</td>
+            </tr>
+            <tr>
+                <td class="text-left">born</td>
+                <td class="text-right">yes</td>
+            </tr>
+            <tr>
+                <td class="text-left">location</td>
+                <td class="text-right">Lübeck, Germany</td>
+            </tr>
+        </table>
 
     </div>
 </template>
@@ -66,6 +79,14 @@ export default {
         right:94px;
         opacity: 0;
         animation: fadeIn 15s infinite;
+    }
+
+    .table {
+        font-size: 1.2rem;
+        color:#486b8e;
+        width:330px;
+        margin-left:auto;
+        margin-right:auto;
     }
 
     @keyframes fadeIn {

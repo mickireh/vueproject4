@@ -38,7 +38,7 @@
         <div class="carousel-item">
           <!-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg> -->
           <div class="container">
-            <div class="carousel-caption">
+            <div class="carousel-caption clear wrapper">
               <div class="col2">
                 <img alt="Firebase logo" src="../assets/firebaselogo.png" class="imageSpin" height="200">
               </div>
@@ -53,7 +53,7 @@
         <div class="carousel-item">
           <!-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg> -->
           <div class="container">
-            <div class="carousel-caption text-right">
+            <div class="carousel-caption text-right clear wrapper">
               <div class="col2">
                 <h1>Bootstrap</h1>
                 <p>Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
@@ -69,9 +69,9 @@
           <!-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg> -->
           <div class="container ">
             <div class="carousel-caption carousel-about">
-              <h1 class="text-secondary">About me</h1>
+              <!-- <h1 class="text-secondary">About me</h1> -->
               <!-- <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p> -->
-              <p><router-link to="/about" class="btn btn-lg btn-about" role="button">About</router-link></p>
+              <p><router-link to="/about" class="btn btn-lg btn-about" role="button">About me</router-link></p>
             </div>
           </div>
         </div>
@@ -192,11 +192,12 @@ export default {
   background-position: center;
 }
 .carousel-about {
-  padding-bottom: 9rem !important;
+  padding-bottom: 12.8rem !important;
 }
 @media screen and (max-width:767px) {
   .carousel-caption {
-    position: static;
+    // position: static;
+    padding-bottom:20px;
   }
   .text-right, .text-left {
     text-align: center !important;
