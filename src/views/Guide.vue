@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <label for="guideContent">Content</label>
                     <!-- <textarea type="text" id="guideContent" placeholder="content.." v-model="guideContent"></textarea> -->
-                    <ckeditor :editor="editor" v-model="guideContent"></ckeditor>
+                    <ckeditor :editor="editor" v-model="guideContent" :config="editorConfig"></ckeditor>
                     <label for="guideLink">Link</label>
                     <input type="text" id="guideLink" placeholder="link.." v-model="guideLink">
                     <p class="error" v-if="this.errors['content'] !== undefined">{{this.errors['content']}}</p>
@@ -94,7 +94,11 @@
                 guideLink: '',
                 errors: {},
                 sticky: '124',
-                editor: ClassicEditor
+                editor: ClassicEditor,
+                editorConfig: {
+                    // Config of the editor
+                    removePlugins : [ 'ImageToolbar', 'ImageUpload', 'MediaEmbed']
+                }
             }
         },
         computed: {
@@ -515,7 +519,7 @@
         border-bottom-right-radius: 5px;
         border-bottom-left-radius: 5px;
         // width: 60%;
-        color:seashell;
+
         z-index: 1;
 
         margin-left: auto;
@@ -524,6 +528,10 @@
         right: 0;
 
         animation: fadeIn .5s;
+
+        label {
+            color:seashell;
+        }
 
         input, label, button, select, option {
             font-family: 'Montserrat', sans-serif;
