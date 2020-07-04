@@ -30,7 +30,8 @@
 
                 <div class="form-group">
                     <label for="guideContent">Content</label>
-                    <textarea type="text" id="guideContent" placeholder="content.." v-model="guideContent"></textarea>
+                    <!-- <textarea type="text" id="guideContent" placeholder="content.." v-model="guideContent"></textarea> -->
+                    <ckeditor :editor="editor" v-model="guideContent"></ckeditor>
                     <label for="guideLink">Link</label>
                     <input type="text" id="guideLink" placeholder="link.." v-model="guideLink">
                     <p class="error" v-if="this.errors['content'] !== undefined">{{this.errors['content']}}</p>
@@ -71,9 +72,15 @@
 
     import { mapGetters } from "vuex";
 
+    import CKEditor from '@ckeditor/ckeditor5-vue';
+    import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
     // console.log(firebase);
     export default {
         name: 'guide',
+        components: {
+            ckeditor: CKEditor.component
+        },
         data() {
             return {
                 db: firebase.firestore(),
@@ -86,7 +93,8 @@
                 guideCategoryNew: '',
                 guideLink: '',
                 errors: {},
-                sticky: '124'
+                sticky: '124',
+                editor: ClassicEditor
             }
         },
         computed: {
