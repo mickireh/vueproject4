@@ -22,6 +22,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Projects</a>
             <div class="dropdown-menu" aria-labelledby="dropdown04">
               <router-link class ="dropdown-item" to="/guide">Guide</router-link>
+              <router-link class ="dropdown-item" to="/guidenew">GuideNew</router-link>
               <router-link class ="dropdown-item" to="/weatherapp">WeatherApp</router-link>
             </div>
           </li>
